@@ -154,7 +154,7 @@ import 'package:accura_sdk/accura_sdk.dart';
       await AccuraSdk.isShowLogo(0);
 
       await AccuraSdk.getMetaData().then((value) =>
-          setupConfigData(json.decode(value)));
+          dynamic result = json.decode(value);
     }on PlatformException{}
     if (!mounted) return;
   }
@@ -432,12 +432,12 @@ _For gallery 1_
 
       await AccuraSdk.getGallery1([accuraConfs]).then((value) => {
         setState(() {
-          _result = json.decode(value);
-          facematchURI = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
+          dynamic result = json.decode(value);
+          facematchURI =  result["Image"];
+          if( result.toString().contains("score")){
+            Score =  result["score"];
           }
-          print("RESULT:- $_result");
+          print("RESULT:- $ result");
         })
       }).onError((error, stackTrace)=>{});
     } on PlatformException {}
@@ -455,12 +455,12 @@ _For gallery 2_
       };
       await AccuraSdk.getGallery2([accuraConfs]).then((value) => {
         setState(() {
-          _result = json.decode(value);
-          facematchURI2 = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
+         dynamic result = json.decode(value);
+          facematchURI2 = result["Image"];
+          if(result.toString().contains("score")){
+            Score = result["score"];
           }
-          print("RESULT:- $_result");
+          print("RESULT:- $result");
         })
       }).onError((error, stackTrace)=>{});
     } on PlatformException {}
@@ -495,12 +495,12 @@ _For Facematch 1:_
 
       await AccuraSdk.getCamera1([accuraConfs]).then((value) => {
         setState(() {
-          _result = json.decode(value);
-          facematchURI = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
+          dynamic result = json.decode(value);
+          facematchURI = result["Image"];
+          if(result.toString().contains("score")){
+            Score = result["score"];
           }
-          print("RESULT:- $_result");
+          print("RESULT:- $result");
         })
       });
     } on PlatformException {}
@@ -535,12 +535,12 @@ _For Facematch 2_
 
       await AccuraSdk.getCamera2([accuraConfs]).then((value) => {
         setState(() {
-          _result = json.decode(value);
-          facematchURI2 = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
+          dynamic result = json.decode(value);
+          facematchURI2 = result["Image"];
+          if(result.toString().contains("score")){
+            Score = result["score"];
           }
-          print("RESULT:- $_result");
+          print("RESULT:- $result");
         })
       });//.onError((error, stackTrace)=>{print("Not Printing")});
     } on PlatformException {}
