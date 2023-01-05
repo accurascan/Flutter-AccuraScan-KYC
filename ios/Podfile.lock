@@ -1,4 +1,7 @@
 PODS:
+  - accura_sdk (0.0.1):
+    - AccuraKYC (= 3.1.8)
+    - Flutter
   - AccuraKYC (3.1.8):
     - AFNetworking (~> 3.2.1)
     - GoogleMLKit
@@ -65,22 +68,13 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - only_for_trial (0.0.1):
-    - AccuraKYC (= 3.1.8)
-    - Flutter
-  - path_provider_ios (0.0.1):
-    - Flutter
-  - "permission_handler (5.1.0+2)":
-    - Flutter
   - PromisesObjC (2.1.1)
   - Protobuf (3.21.12)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - accura_sdk (from `.symlinks/plugins/accura_sdk/ios`)
   - Flutter (from `Flutter`)
-  - only_for_trial (from `.symlinks/plugins/only_for_trial/ios`)
-  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
 
 SPEC REPOS:
   trunk:
@@ -99,16 +93,13 @@ SPEC REPOS:
     - SVProgressHUD
 
 EXTERNAL SOURCES:
+  accura_sdk:
+    :path: ".symlinks/plugins/accura_sdk/ios"
   Flutter:
     :path: Flutter
-  only_for_trial:
-    :path: ".symlinks/plugins/only_for_trial/ios"
-  path_provider_ios:
-    :path: ".symlinks/plugins/path_provider_ios/ios"
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
 
 SPEC CHECKSUMS:
+  accura_sdk: 12f267beab13630ac00384df21cdbb3281fd9860
   AccuraKYC: 139159990b788cc7742ce5433a6b57c7d701c907
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
@@ -120,9 +111,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   MLKitCommon: f6da6c5659618c070b50a80db01248ebe2964175
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  only_for_trial: 18c9b8030835db2c9321efd3f8c82ef5b5e89c27
-  path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
