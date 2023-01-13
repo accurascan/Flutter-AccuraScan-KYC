@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 import 'package:flutterkyc/ResultScreen.dart';
 
+
+import 'ResultScreen.dart';
 class CardList extends StatefulWidget {
   const CardList({Key? key, required this.card, required this.countrySelect}) : super(key: key);
   final List card;
@@ -31,7 +33,6 @@ class _CardListState extends State<CardList> {
         cardSelected['name'],
         cardSelected['type'],
       ];
-      print("startOcr: $config");
       await AccuraOcr.startOcrWithCard(config)
           .then((value) =>
       {

@@ -30,8 +30,6 @@ class _ResultScreenState extends State<ResultScreen> {
     setState((){
       faceMatchURL = ResultScreen.result['face'].toString();
     });
-    print('Data from other Screen');
-    print(ResultScreen.result);
   }
 
   Future<void> startFaceMatch() async{
@@ -353,8 +351,7 @@ class _ResultScreenState extends State<ResultScreen> {
             ],
           )
               : Container()),
-        )
-            .toList());
+        ).toList());
   }
 
   //Code for display MRZ, OCR, Barcode, BankCard data

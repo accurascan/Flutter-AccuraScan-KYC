@@ -18,7 +18,8 @@ allprojects {
         maven {
             url 'https://jitpack.io'
             credentials { username 'jp_ssguccab6c5ge2l4jitaj92ek2' }
-        }    }
+        }
+    }
 }
 
 rootProject.buildDir = '../build'

@@ -1,7 +1,4 @@
 PODS:
-  - accura_sdk (0.0.1):
-    - AccuraKYC (= 3.1.8)
-    - Flutter
   - AccuraKYC (3.1.8):
     - AFNetworking (~> 3.2.1)
     - GoogleMLKit
@@ -22,6 +19,9 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - Flutter (1.0.0)
+  - flutter_accurascan_kyc (0.0.1):
+    - AccuraKYC (= 3.1.8)
+    - Flutter
   - GoogleDataTransport (9.2.0):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -73,8 +73,8 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
-  - accura_sdk (from `.symlinks/plugins/accura_sdk/ios`)
   - Flutter (from `Flutter`)
+  - flutter_accurascan_kyc (from `.symlinks/plugins/flutter_accurascan_kyc/ios`)
 
 SPEC REPOS:
   trunk:
@@ -93,16 +93,16 @@ SPEC REPOS:
     - SVProgressHUD
 
 EXTERNAL SOURCES:
-  accura_sdk:
-    :path: ".symlinks/plugins/accura_sdk/ios"
   Flutter:
     :path: Flutter
+  flutter_accurascan_kyc:
+    :path: ".symlinks/plugins/flutter_accurascan_kyc/ios"
 
 SPEC CHECKSUMS:
-  accura_sdk: 12f267beab13630ac00384df21cdbb3281fd9860
   AccuraKYC: 139159990b788cc7742ce5433a6b57c7d701c907
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_accurascan_kyc: e244466a3b509815bcfe419f42db074dada367c1
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleMLKit: 0017a6a8372e1a182139b9def4d89be5d87ca5a7
   GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34

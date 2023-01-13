@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutterkyc/FaceMatch.dart';
 import 'package:flutterkyc/ocrScreen.dart';
 
 
+
+import 'FaceMatch.dart';
 void main() {
   runApp(MaterialApp(
     home: HomePage(),
@@ -19,12 +20,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Accura KYC"),
+        title: const Text("Accura KYC 3.1.2"),
         backgroundColor: Colors.red[800],
       ),
       body: Container(

@@ -8,6 +8,7 @@ import 'package:flutterkyc/ResultScreen.dart';
 import 'package:flutterkyc/barcodeList.dart';
 import 'package:flutterkyc/cardList.dart';
 
+
 void main() {
   runApp(MaterialApp(
     home: MyApp(),
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   List<Map<String, dynamic>> mrzList = [
     {"label": "Passport", "value": "passport_mrz"},
     {"label": "Mrz ID", "value": "id_mrz"},
-    {"label": "Visa Card", "value": "visa_card"},
+    {"label": "Visa Card", "value": "visa_mrz"},
     {"label": "Other", "value": "other_mrz"}
   ];
 
@@ -53,7 +54,14 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> getMetaData() async{
     try {
+      await AccuraOcr.getMetaData().then((value) =>
+          setupConfigData(json.decode(value)));
+    }on PlatformException{}
+    if (!mounted) return;
+  }
 
+  Future<void> setAccuraConfig() async{
+    try {
       await AccuraOcr.setFaceBlurPercentage(80);
       await AccuraOcr.setHologramDetection(true);
       await AccuraOcr.setLowLightTolerance(10);
@@ -93,19 +101,14 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
       await AccuraOcr.isShowLogo(0);
 
-      await AccuraOcr.getMetaData().then((value) =>
-          setupConfigData(json.decode(value)));
-    }on PlatformException{}
-    if (!mounted) return;
-  }
+      await AccuraOcr.setAccuraConfigs().then((value) => {
+        setState((){
+          print(json.decode(value));
+        })
+      });
 
-  String getOrientation() {
-    if(MediaQuery.of(context).orientation.toString().contains('landscape')){
-      return 'landscape';
-    }else{
-      return 'portrait';
+    }on PlatformException{}
     }
-  }
 
   Future<void> startBankCard() async{
     try{
@@ -124,12 +127,11 @@ class _MyAppState extends State<MyApp> {
       sdkConfig = obj;
     });
     if(sdkConfig["isValid"] == true){
+      setAccuraConfig();
       List<String> tempList3=[];
       List barcodeData = [];
-      print("setUpConfigData = ${obj}");
 
       List countryData = obj['countryList'];
-      print("setUpConfigDatabvg = $countryData");
       if(sdkConfig['isMRZEnable']) {
         for (var item in mrzList) {
           tempList3.add(item['label']);
@@ -171,7 +173,6 @@ class _MyAppState extends State<MyApp> {
         })
       }).onError((error, stackTrace) => {
         setState(() {
-          print("error");
         })
       });
     } on PlatformException {}
