@@ -1,17 +1,20 @@
 # Flutter Accura Scan KYC
 
 
-Accura OCR is used for Optical character recognition.
+Accura Scan OCR is used for Optical character recognition.
 
-Accura Face Match is used for Matching 2 Faces, Source face and Target face. It matches the User Image from a Selfie vs User Image in document.
+Accura Scan Face Match is used for Matching 2 Faces, Source face and Target face. It matches the User Image from a Selfie vs User Image in document.
 
-Accura Authentication is used for your customer verification and authentication. Unlock the True Identity of Your Users with 3D Selfie Technology
+Accura Scan Authentication is used for your customer verification and authentication. Unlock the True Identity of Your Users with 3D Selfie Technology
 
 
-Below steps to setup Accura's SDK to your project.
+Below steps to setup Accura Scan's SDK to your project.
 
-Note:-
+## Note:-
 Add `flutter_accurascan_kyc` under dependencies in your pubspec.yaml file.
+**Usage**
+Import flutter library into file.
+`import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';`
 
 ## 1.Setup Android
 
@@ -75,9 +78,9 @@ packagingOptions {
 <string>App usage photos for save document picture.</string>
 ```
 
-## 3.Setup AccuraScan licenses into your projects
+## 3.Setup Accura Scan licenses into your projects
 
-Accura has two license require for use full functionality of this library. Generate your own Accura license from here
+Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from here
 **key.license**
 
 This license is compulsory for this library to work. it will get all setup of accura SDK.
@@ -85,25 +88,19 @@ This license is compulsory for this library to work. it will get all setup of ac
 **accuraface.license**
 
 This license is use for get face match percentages between two face pictures.
-And also for Passive Liveness.
 
 **For Android**
 
 ```
 Create "assets" folder under app/src/main and Add license file in to assets folder.
-- key.license // for Accura OCR
-- accuraface.license // for Accura Face Match
-Generate your Accura license from https://accurascan.com/developer/dashboard
+- key.license // for Accura Scan OCR
+- accuraface.license // for Accura Scan Face Match
+Generate your Accura Scan license from https://accurascan.com/developer/dashboard
 ```
 **For iOS**
 ```
 Place both the license in your project's Runner directory, and add the licenses to the target.
 ```
-
-**Usage**
-
-Import flutter library into file.
-import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 
 
 
@@ -216,9 +213,6 @@ Future<void> startMRZ() async {
 **MRZType:** String
 
 #### value: other_mrz or passport_mrz or id_mrz or visa_mrz<br></br>
-**CountryList:** String
-
-**value:** all or IND,USA
 
 **Success:** JSON Response {
 
