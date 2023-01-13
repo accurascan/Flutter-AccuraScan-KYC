@@ -1,4 +1,4 @@
-# flutter_accurascan_kyc
+# Flutter Accura Scan KYC
 
 
 Accura OCR is used for Optical character recognition.
