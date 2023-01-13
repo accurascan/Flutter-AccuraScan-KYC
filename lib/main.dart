@@ -1,10 +1,7 @@
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutterkyc/FaceMatch.dart';
 import 'package:flutterkyc/ocrScreen.dart';
-import 'package:flutter/services.dart';
 
 
 void main() {

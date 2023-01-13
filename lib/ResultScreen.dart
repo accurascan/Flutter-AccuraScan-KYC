@@ -5,7 +5,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:accura_sdk/accura_sdk.dart';
+import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen({Key? key}) : super(key: key);
@@ -41,21 +41,21 @@ class _ResultScreenState extends State<ResultScreen> {
         "face_uri":this.faceMatchURL
       };
 
-      await AccuraSdk.setFaceMatchFeedbackTextSize(18);
-      await AccuraSdk.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraSdk.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraSdk.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraSdk.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraSdk.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraSdk.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraSdk.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraSdk.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraSdk.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraSdk.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraSdk.setBlurPercentage(80);
-      await AccuraSdk.setFaceMatchGlarePercentage_0(-1);
-      await AccuraSdk.setFaceMatchGlarePercentage_1(-1);
-      await AccuraSdk.startFaceMatch([accuraConfs])
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
+      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
+      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
+      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
+      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
+      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraFacematch.setFaceMatchBlurPercentage(80);
+      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
+      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
+      await AccuraFacematch.startFaceMatch([accuraConfs])
           .then((value) => {
         setState((){
           if(ResultScreen.Orientation == "landscape"){
@@ -82,26 +82,26 @@ class _ResultScreenState extends State<ResultScreen> {
         "face_uri":this.faceMatchURL
       };
 
-      await AccuraSdk.setLivenessFeedbackTextSize(18);
-      await AccuraSdk.setLivenessFeedBackframeMessage("Frame Your Face");
-      await AccuraSdk.setLivenessFeedBackAwayMessage("Move Phone Away");
-      await AccuraSdk.setLivenessFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraSdk.setLivenessFeedBackCloserMessage("Move Phone Closer");
-      await AccuraSdk.setLivenessFeedBackCenterMessage("Move Phone Closer");
-      await AccuraSdk.setLivenessFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraSdk.setLivenessFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraSdk.setLivenessFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraSdk.setLivenessFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraSdk.setLivenessBlurPercentage(80);
-      await AccuraSdk.setLivenessGlarePercentage_0(-1);
-      await AccuraSdk.setLivenessGlarePercentage_1(-1);
-      await AccuraSdk.setLivenessFeedBackLowLightMessage("Low light detected");
-      await AccuraSdk.setLivenessfeedbackLowLightTolerence(39);
-      await AccuraSdk.setLivenessURL("your liveness url");
+      await AccuraLiveness.setLivenessFeedbackTextSize(18);
+      await AccuraLiveness.setLivenessFeedBackframeMessage("Frame Your Face");
+      await AccuraLiveness.setLivenessFeedBackAwayMessage("Move Phone Away");
+      await AccuraLiveness.setLivenessFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraLiveness.setLivenessFeedBackCloserMessage("Move Phone Closer");
+      await AccuraLiveness.setLivenessFeedBackCenterMessage("Move Phone Closer");
+      await AccuraLiveness.setLivenessFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraLiveness.setLivenessFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraLiveness.setLivenessFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraLiveness.setLivenessFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraLiveness.setLivenessBlurPercentage(80);
+      await AccuraLiveness.setLivenessGlarePercentage_0(-1);
+      await AccuraLiveness.setLivenessGlarePercentage_1(-1);
+      await AccuraLiveness.setLivenessFeedBackLowLightMessage("Low light detected");
+      await AccuraLiveness.setLivenessfeedbackLowLightTolerence(39);
+      await AccuraLiveness.setLivenessURL("your liveness url");
 
 
 
-      await AccuraSdk.startLiveness([accuraConfs])
+      await AccuraLiveness.startLiveness([accuraConfs])
           .then((value) => {
         setState((){
           if(ResultScreen.Orientation  == "landscape"){

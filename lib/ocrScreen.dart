@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:accura_sdk/accura_sdk.dart';
+import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 import 'package:flutterkyc/ResultScreen.dart';
 import 'package:flutterkyc/barcodeList.dart';
 import 'package:flutterkyc/cardList.dart';
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
   List<Map<String, dynamic>> mrzList = [
     {"label": "Passport", "value": "passport_mrz"},
     {"label": "Mrz ID", "value": "id_mrz"},
-    {"label": "Visa Card", "value": "visa_mrz"},
+    {"label": "Visa Card", "value": "visa_card"},
     {"label": "Other", "value": "other_mrz"}
   ];
 
@@ -54,46 +54,46 @@ class _MyAppState extends State<MyApp> {
   Future<void> getMetaData() async{
     try {
 
-      await AccuraSdk.setFaceBlurPercentage(80);
-      await AccuraSdk.setHologramDetection(true);
-      await AccuraSdk.setLowLightTolerance(10);
-      await AccuraSdk.setMotionThreshold(25);
-      await AccuraSdk.setMinGlarePercentage(6);
-      await AccuraSdk.setMaxGlarePercentage(99);
-      await AccuraSdk.setBlurPercentage(60);
-      await AccuraSdk.setCameraFacing(0);
-      await AccuraSdk.isCheckPhotoCopy(false);
+      await AccuraOcr.setFaceBlurPercentage(80);
+      await AccuraOcr.setHologramDetection(true);
+      await AccuraOcr.setLowLightTolerance(10);
+      await AccuraOcr.setMotionThreshold(25);
+      await AccuraOcr.setMinGlarePercentage(6);
+      await AccuraOcr.setMaxGlarePercentage(99);
+      await AccuraOcr.setBlurPercentage(60);
+      await AccuraOcr.setCameraFacing(0);
+      await AccuraOcr.isCheckPhotoCopy(false);
 
-      await AccuraSdk.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
-      await AccuraSdk.SCAN_TITLE_OCR_BACK("Scan Back side of ");
-      await AccuraSdk.SCAN_TITLE_OCR("Scan ");
-      await AccuraSdk.SCAN_TITLE_MRZ_PDF417_FRONT("Scan Front Side of Document");
-      await AccuraSdk.SCAN_TITLE_MRZ_PDF417_BACK("Scan Back Side of Document");
-      await AccuraSdk.SCAN_TITLE_DLPLATE("Scan Number plate");
-      await AccuraSdk.SCAN_TITLE_BARCODE("Scan Barcode");
-      await AccuraSdk.SCAN_TITLE_BANKCARD("Scan BankCard");
+      await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
+      await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
+      await AccuraOcr.SCAN_TITLE_OCR("Scan ");
+      await AccuraOcr.SCAN_TITLE_MRZ_PDF417_FRONT("Scan Front Side of Document");
+      await AccuraOcr.SCAN_TITLE_MRZ_PDF417_BACK("Scan Back Side of Document");
+      await AccuraOcr.SCAN_TITLE_DLPLATE("Scan Number plate");
+      await AccuraOcr.SCAN_TITLE_BARCODE("Scan Barcode");
+      await AccuraOcr.SCAN_TITLE_BANKCARD("Scan BankCard");
 
 
-      await AccuraSdk.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
-      await AccuraSdk.ACCURA_ERROR_CODE_DOCUMENT_IN_FRAME("Keep document in frame");
-      await AccuraSdk.ACCURA_ERROR_CODE_BRING_DOCUMENT_IN_FRAME("Bring card near to frame");
-      await AccuraSdk.ACCURA_ERROR_CODE_PROCESSING("Processing");
-      await AccuraSdk.ACCURA_ERROR_CODE_BLUR_DOCUMENT("Blur detect in document");
-      await AccuraSdk.ACCURA_ERROR_CODE_FACE_BLUR("Blur detected over face");
-      await AccuraSdk.ACCURA_ERROR_CODE_GLARE_DOCUMENT("Glare detect in document");
-      await AccuraSdk.ACCURA_ERROR_CODE_HOLOGRAM("Hologram Detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_DARK_DOCUMENT("Low lighting detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_PHOTO_COPY_DOCUMENT("Can not accept Photo Copy Document");
-      await AccuraSdk.ACCURA_ERROR_CODE_FACE("Face not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_MRZ("MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_PASSPORT_MRZ("Passport MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_ID_MRZ("ID MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_VISA_MRZ("Visa MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_UPSIDE_DOWN_SIDE("Document is upside down. Place it properly");
-      await AccuraSdk.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
-      await AccuraSdk.isShowLogo(0);
+      await AccuraOcr.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
+      await AccuraOcr.ACCURA_ERROR_CODE_DOCUMENT_IN_FRAME("Keep document in frame");
+      await AccuraOcr.ACCURA_ERROR_CODE_BRING_DOCUMENT_IN_FRAME("Bring card near to frame");
+      await AccuraOcr.ACCURA_ERROR_CODE_PROCESSING("Processing");
+      await AccuraOcr.ACCURA_ERROR_CODE_BLUR_DOCUMENT("Blur detect in document");
+      await AccuraOcr.ACCURA_ERROR_CODE_FACE_BLUR("Blur detected over face");
+      await AccuraOcr.ACCURA_ERROR_CODE_GLARE_DOCUMENT("Glare detect in document");
+      await AccuraOcr.ACCURA_ERROR_CODE_HOLOGRAM("Hologram Detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_DARK_DOCUMENT("Low lighting detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_PHOTO_COPY_DOCUMENT("Can not accept Photo Copy Document");
+      await AccuraOcr.ACCURA_ERROR_CODE_FACE("Face not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_MRZ("MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_PASSPORT_MRZ("Passport MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_ID_MRZ("ID MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_VISA_MRZ("Visa MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_UPSIDE_DOWN_SIDE("Document is upside down. Place it properly");
+      await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
+      await AccuraOcr.isShowLogo(0);
 
-      await AccuraSdk.getMetaData().then((value) =>
+      await AccuraOcr.getMetaData().then((value) =>
           setupConfigData(json.decode(value)));
     }on PlatformException{}
     if (!mounted) return;
@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> startBankCard() async{
     try{
-      await AccuraSdk.startBankCard().then((value) => {
+      await AccuraOcr.startBankCard().then((value) => {
         setState((){
           _result = json.decode(value);
           ResultScreen.result = _result;
@@ -130,7 +130,6 @@ class _MyAppState extends State<MyApp> {
 
       List countryData = obj['countryList'];
       print("setUpConfigDatabvg = $countryData");
-      print("objectsscscs ${sdkConfig['isMRZEnable']}");
       if(sdkConfig['isMRZEnable']) {
         for (var item in mrzList) {
           tempList3.add(item['label']);
@@ -142,7 +141,6 @@ class _MyAppState extends State<MyApp> {
       if(sdkConfig['isBarcodeEnable']) {
         tempList3.add("Barcode");
         barcodeData = obj["barcodes"];
-        print("mcidcme $barcodeData");
       }
 
       for (var item in countryData) {
@@ -163,7 +161,7 @@ class _MyAppState extends State<MyApp> {
         mrzselected,
       ];
       print('startMRZ:- $config');
-      await AccuraSdk.startMRZ(config)
+      await AccuraOcr.startMRZ(config)
           .then((value) => {
         setState((){
           _result = json.decode(value);
@@ -173,7 +171,7 @@ class _MyAppState extends State<MyApp> {
         })
       }).onError((error, stackTrace) => {
         setState(() {
-          print("njhvgchgb");
+          print("error");
         })
       });
     } on PlatformException {}

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:accura_sdk/accura_sdk.dart';
+import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 
 void main() {
   runApp(const FaceMatch());
@@ -29,7 +29,7 @@ class _FaceMatchState extends State<FaceMatch> {
         "face2": this.facematchURI2
       };
 
-      await AccuraSdk.getGallery1([accuraConfs]).then((value) => {
+      await AccuraOcr.getGallery1([accuraConfs]).then((value) => {
         setState(() {
           _result = json.decode(value);
           facematchURI = _result["Image"];
@@ -49,7 +49,7 @@ class _FaceMatchState extends State<FaceMatch> {
         "face1": this.facematchURI,
         "face2": this.facematchURI2
       };
-      await AccuraSdk.getGallery2([accuraConfs]).then((value) => {
+      await AccuraOcr.getGallery2([accuraConfs]).then((value) => {
         setState(() {
           _result = json.decode(value);
           facematchURI2 = _result["Image"];
@@ -69,22 +69,22 @@ class _FaceMatchState extends State<FaceMatch> {
         "face1": this.facematchURI,
         "face2": this.facematchURI2
       };
-      await AccuraSdk.setFaceMatchFeedbackTextSize(18);
-      await AccuraSdk.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraSdk.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraSdk.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraSdk.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraSdk.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraSdk.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraSdk.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraSdk.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraSdk.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraSdk.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraSdk.setBlurPercentage(80);
-      await AccuraSdk.setFaceMatchGlarePercentage_0(-1);
-      await AccuraSdk.setFaceMatchGlarePercentage_1(-1);
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
+      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
+      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
+      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
+      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
+      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraFacematch.setFaceMatchBlurPercentage(80);
+      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
+      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
 
-      await AccuraSdk.getCamera1([accuraConfs]).then((value) => {
+      await AccuraFacematch.getCamera1([accuraConfs]).then((value) => {
         setState(() {
           _result = json.decode(value);
           facematchURI = _result["Image"];
@@ -106,22 +106,22 @@ class _FaceMatchState extends State<FaceMatch> {
         "face2": this.facematchURI2
       };
 
-      await AccuraSdk.setFaceMatchFeedbackTextSize(18);
-      await AccuraSdk.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraSdk.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraSdk.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraSdk.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraSdk.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraSdk.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraSdk.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraSdk.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraSdk.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraSdk.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraSdk.setBlurPercentage(80);
-      await AccuraSdk.setFaceMatchGlarePercentage_0(-1);
-      await AccuraSdk.setFaceMatchGlarePercentage_1(-1);
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
+      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
+      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
+      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
+      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
+      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraFacematch.setFaceMatchBlurPercentage(80);
+      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
+      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
 
-      await AccuraSdk.getCamera2([accuraConfs]).then((value) => {
+      await AccuraFacematch.getCamera2([accuraConfs]).then((value) => {
         setState(() {
           _result = json.decode(value);
           facematchURI2 = _result["Image"];
@@ -130,7 +130,7 @@ class _FaceMatchState extends State<FaceMatch> {
           }
           print("RESULT:- $_result");
         })
-      });//.onError((error, stackTrace)=>{print("Not Printing")});
+      });
     } on PlatformException {}
     if(!mounted) return;
   }
@@ -223,7 +223,6 @@ class _FaceMatchState extends State<FaceMatch> {
                                 top: 10, bottom: 10, right: 20, left: 20),
                             primary: Colors.red[800]),
                         onPressed: (){
-                      print("jbhjhjbj");
                       openGallery2();
                     },
                         child: Text("Open Gallery")
@@ -239,7 +238,6 @@ class _FaceMatchState extends State<FaceMatch> {
                                 top: 10, bottom: 10, right: 20, left: 20),
                             primary: Colors.red[800]),
                         onPressed: (){
-                      print("jbhjhjbj");
                       openCamera2();
                     },
                         child: Text("Open Camera")

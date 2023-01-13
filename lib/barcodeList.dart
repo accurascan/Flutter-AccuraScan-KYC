@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:accura_sdk/accura_sdk.dart';
+import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 import 'package:flutterkyc/ResultScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class _BarcodeListState extends State<BarcodeList> {
 
   Future<void> startBarcode() async{
     var config= barcodeSelected;
-    await AccuraSdk.startBarcode([config]).then((value) => {
+    await AccuraOcr.startBarcode([config]).then((value) => {
       setState((){
         _result = json.decode(value);
       })

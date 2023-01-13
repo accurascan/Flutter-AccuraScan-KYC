@@ -1,6 +1,4 @@
-# Flutter Kyc
-
-Add `accura_sdk: ^0.0.1` under dependencies in your pubspec.yaml file.
+# flutter_accurascan_kyc
 
 
 Accura OCR is used for Optical character recognition.
@@ -12,7 +10,8 @@ Accura Authentication is used for your customer verification and authentication.
 
 Below steps to setup Accura's SDK to your project.
 
-
+Note:-
+Add `flutter_accurascan_kyc` under dependencies in your pubspec.yaml file.
 
 ## 1.Setup Android
 
@@ -98,63 +97,24 @@ Generate your Accura license from https://accurascan.com/developer/dashboard
 ```
 **For iOS**
 ```
-Place both the license in your project's directory, and add the licenses to the target.
+Place both the license in your project's Runner directory, and add the licenses to the target.
 ```
 
 **Usage**
 
 Import flutter library into file.
-import 'package:accura_sdk/accura_sdk.dart';
+import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 
 
 
 ## 4.Get license configuration from SDK. It returns all active functionalities of your license.
 
+### Setting up License
 ```
- Future<void> getMetaData() async{
+  Future<void> getMetaData() async{
     try {
-
-      await AccuraSdk.setFaceBlurPercentage(80);
-      await AccuraSdk.setHologramDetection(true);
-      await AccuraSdk.setLowLightTolerance(10);
-      await AccuraSdk.setMotionThreshold(25);
-      await AccuraSdk.setMinGlarePercentage(6);
-      await AccuraSdk.setMaxGlarePercentage(99);
-      await AccuraSdk.setBlurPercentage(60);
-      await AccuraSdk.setCameraFacing(0);
-      await AccuraSdk.isCheckPhotoCopy(false);
-
-      await AccuraSdk.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
-      await AccuraSdk.SCAN_TITLE_OCR_BACK("Scan Back side of ");
-      await AccuraSdk.SCAN_TITLE_OCR("Scan ");
-      await AccuraSdk.SCAN_TITLE_MRZ_PDF417_FRONT("Scan Front Side of Document");
-      await AccuraSdk.SCAN_TITLE_MRZ_PDF417_BACK("Scan Back Side of Document");
-      await AccuraSdk.SCAN_TITLE_DLPLATE("Scan Number plate");
-      await AccuraSdk.SCAN_TITLE_BARCODE("Scan Barcode");
-      await AccuraSdk.SCAN_TITLE_BANKCARD("Scan BankCard");
-
-
-      await AccuraSdk.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
-      await AccuraSdk.ACCURA_ERROR_CODE_DOCUMENT_IN_FRAME("Keep document in frame");
-      await AccuraSdk.ACCURA_ERROR_CODE_BRING_DOCUMENT_IN_FRAME("Bring card near to frame");
-      await AccuraSdk.ACCURA_ERROR_CODE_PROCESSING("Processing");
-      await AccuraSdk.ACCURA_ERROR_CODE_BLUR_DOCUMENT("Blur detect in document");
-      await AccuraSdk.ACCURA_ERROR_CODE_FACE_BLUR("Blur detected over face");
-      await AccuraSdk.ACCURA_ERROR_CODE_GLARE_DOCUMENT("Glare detect in document");
-      await AccuraSdk.ACCURA_ERROR_CODE_HOLOGRAM("Hologram Detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_DARK_DOCUMENT("Low lighting detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_PHOTO_COPY_DOCUMENT("Can not accept Photo Copy Document");
-      await AccuraSdk.ACCURA_ERROR_CODE_FACE("Face not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_MRZ("MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_PASSPORT_MRZ("Passport MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_ID_MRZ("ID MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_VISA_MRZ("Visa MRZ not detected");
-      await AccuraSdk.ACCURA_ERROR_CODE_UPSIDE_DOWN_SIDE("Document is upside down. Place it properly");
-      await AccuraSdk.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
-      await AccuraSdk.isShowLogo(0);
-
-      await AccuraSdk.getMetaData().then((value) =>
-          dynamic result = json.decode(value);
+      await AccuraOcr.getMetaData().then((value) =>
+          setupConfigData(json.decode(value)));
     }on PlatformException{}
     if (!mounted) return;
   }
@@ -181,6 +141,58 @@ import 'package:accura_sdk/accura_sdk.dart';
 
 }
 
+### Setting up Configuration's,Error mssages and Scaning title messages
+
+```
+ Future<void> setAccuraConfig() async{
+    try {
+
+      await AccuraOcr.setFaceBlurPercentage(80);
+      await AccuraOcr.setHologramDetection(true);
+      await AccuraOcr.setLowLightTolerance(10);
+      await AccuraOcr.setMotionThreshold(25);
+      await AccuraOcr.setMinGlarePercentage(6);
+      await AccuraOcr.setMaxGlarePercentage(99);
+      await AccuraOcr.setBlurPercentage(60);
+      await AccuraOcr.setCameraFacing(0);
+      await AccuraOcr.isCheckPhotoCopy(false);
+
+      await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
+      await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
+      await AccuraOcr.SCAN_TITLE_OCR("Scan ");
+      await AccuraOcr.SCAN_TITLE_MRZ_PDF417_FRONT("Scan Front Side of Document");
+      await AccuraOcr.SCAN_TITLE_MRZ_PDF417_BACK("Scan Back Side of Document");
+      await AccuraOcr.SCAN_TITLE_DLPLATE("Scan Number plate");
+      await AccuraOcr.SCAN_TITLE_BARCODE("Scan Barcode");
+      await AccuraOcr.SCAN_TITLE_BANKCARD("Scan BankCard");
+
+
+      await AccuraOcr.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
+      await AccuraOcr.ACCURA_ERROR_CODE_DOCUMENT_IN_FRAME("Keep document in frame");
+      await AccuraOcr.ACCURA_ERROR_CODE_BRING_DOCUMENT_IN_FRAME("Bring card near to frame");
+      await AccuraOcr.ACCURA_ERROR_CODE_PROCESSING("Processing");
+      await AccuraOcr.ACCURA_ERROR_CODE_BLUR_DOCUMENT("Blur detect in document");
+      await AccuraOcr.ACCURA_ERROR_CODE_FACE_BLUR("Blur detected over face");
+      await AccuraOcr.ACCURA_ERROR_CODE_GLARE_DOCUMENT("Glare detect in document");
+      await AccuraOcr.ACCURA_ERROR_CODE_HOLOGRAM("Hologram Detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_DARK_DOCUMENT("Low lighting detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_PHOTO_COPY_DOCUMENT("Can not accept Photo Copy Document");
+      await AccuraOcr.ACCURA_ERROR_CODE_FACE("Face not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_MRZ("MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_PASSPORT_MRZ("Passport MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_ID_MRZ("ID MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_VISA_MRZ("Visa MRZ not detected");
+      await AccuraOcr.ACCURA_ERROR_CODE_UPSIDE_DOWN_SIDE("Document is upside down. Place it properly");
+      await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
+      await AccuraOcr.isShowLogo(0);
+
+      await AccuraOcr.setAccuraConfigs();
+
+    }on PlatformException{}
+  }
+  
+```
+
 ## 5.Method for scan MRZ documents.
 
    ```
@@ -190,7 +202,7 @@ Future<void> startMRZ() async {
      {"enableLogs": false},
      mrzselected,
    ];
-   await AccuraSdk.startMRZ(config)
+   await AccuraOcr.startMRZ(config)
        .then((value) => {
      setState((){
        dynamic result = json.decode(value);
@@ -224,8 +236,8 @@ Future<void> startMRZ() async {
 
 }
 
-
 **Error:** String
+
 
 ## 6.Method for scan OCR documents.
    ```
@@ -238,7 +250,7 @@ Future<void> startOCR() async {
      cardSelected['name'],
      cardSelected['type'],
    ];
-   await AccuraSdk.startOcrWithCard(config)
+   await AccuraOcr.startOcrWithCard(config)
        .then((value) =>
    {
      setState(() {
@@ -273,11 +285,12 @@ Future<void> startOCR() async {
 
 **Error:** String
 
+
 ## 7.Method for scan barcode.
    ```
 Future<void> startBarcode() async{
  var config= barcodeSelected;
- await AccuraSdk.startBarcode([config]).then((value) => {
+ await AccuraOcr.startBarcode([config]).then((value) => {
    setState((){
      dynamic result = json.decode(value);
    })
@@ -296,11 +309,12 @@ Future<void> startBarcode() async{
 
 
 ## 8.Method for scan bankcard.
+
    ```
 Future<void> startBankCard() async{
    
  try{
-   await AccuraSdk.startBankCard().then((value) => {
+   await AccuraOcr.startBankCard().then((value) => {
      setState((){
        dynamic result = json.decode(value);
      })
@@ -323,21 +337,22 @@ Future<void> startFaceMatch() async{
      "face_uri":this.faceMatchURL
    };
 
-   await AccuraSdk.setFaceMatchFeedbackTextSize(18);
-   await AccuraSdk.setFaceMatchFeedBackframeMessage("Frame Your Face");
-   await AccuraSdk.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-   await AccuraSdk.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-   await AccuraSdk.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-   await AccuraSdk.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-   await AccuraSdk.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-   await AccuraSdk.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-   await AccuraSdk.setFaceMatchFeedBackLowLightMessage("Low light detected");
-   await AccuraSdk.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-   await AccuraSdk.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-   await AccuraSdk.setBlurPercentage(80);
-   await AccuraSdk.setFaceMatchGlarePercentage_0(-1);
-   await AccuraSdk.setFaceMatchGlarePercentage_1(-1);
-   await AccuraSdk.startFaceMatch([accuraConfs])
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
+      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
+      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
+      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
+      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
+      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraFacematch.setFaceMatchBlurPercentage(80);
+      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
+      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
+
+      await AccuraFacematch.startFaceMatch([accuraConfs])
        .then((value) => {
      setState((){
        dynamic result = json.decode(value);
@@ -371,24 +386,26 @@ Future<void> startLiveness() async{
      "face_uri":this.faceMatchURL
    };
 
-   await AccuraSdk.setLivenessFeedbackTextSize(18);
-   await AccuraSdk.setLivenessFeedBackframeMessage("Frame Your Face");
-   await AccuraSdk.setLivenessFeedBackAwayMessage("Move Phone Away");
-   await AccuraSdk.setLivenessFeedBackOpenEyesMessage("Keep Your Eyes Open");
-   await AccuraSdk.setLivenessFeedBackCloserMessage("Move Phone Closer");
-   await AccuraSdk.setLivenessFeedBackCenterMessage("Move Phone Closer");
-   await AccuraSdk.setLivenessFeedbackMultipleFaceMessage("Multiple Face Detected");
-   await AccuraSdk.setLivenessFeedBackFaceSteadymessage("Keep Your Head Straight");
-   await AccuraSdk.setLivenessFeedBackBlurFaceMessage("Blur Detected Over Face");
-   await AccuraSdk.setLivenessFeedBackGlareFaceMessage("Glare Detected");
-   await AccuraSdk.setLivenessBlurPercentage(80);
-   await AccuraSdk.setLivenessGlarePercentage_0(-1);
-   await AccuraSdk.setLivenessGlarePercentage_1(-1);
-   await AccuraSdk.setLivenessFeedBackLowLightMessage("Low light detected");
-   await AccuraSdk.setLivenessfeedbackLowLightTolerence(39);
-   await AccuraSdk.setLivenessURL("https://accurascan.com:8443");
+      await AccuraLiveness.setLivenessFeedbackTextSize(18);
+      await AccuraLiveness.setLivenessFeedBackframeMessage("Frame Your Face");
+      await AccuraLiveness.setLivenessFeedBackAwayMessage("Move Phone Away");
+      await AccuraLiveness.setLivenessFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraLiveness.setLivenessFeedBackCloserMessage("Move Phone Closer");
+      await AccuraLiveness.setLivenessFeedBackCenterMessage("Move Phone Closer");
+      await AccuraLiveness.setLivenessFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraLiveness.setLivenessFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraLiveness.setLivenessFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraLiveness.setLivenessFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraLiveness.setLivenessBlurPercentage(80);
+      await AccuraLiveness.setLivenessGlarePercentage_0(-1);
+      await AccuraLiveness.setLivenessGlarePercentage_1(-1);
+      await AccuraLiveness.setLivenessFeedBackLowLightMessage("Low light detected");
+      await AccuraLiveness.setLivenessfeedbackLowLightTolerence(39);
+      await AccuraLiveness.setLivenessURL("You Liveness Url");
 
-   await AccuraSdk.startLiveness([accuraConfs])
+
+
+      await AccuraLiveness.startLiveness([accuraConfs])
        .then((value) => {
      setState((){
        dynamic result = json.decode(value);
@@ -430,14 +447,14 @@ _For gallery 1_
         "face2": this.facematchURI2
       };
 
-      await AccuraSdk.getGallery1([accuraConfs]).then((value) => {
+      await AccuraOcr.getGallery1([accuraConfs]).then((value) => {
         setState(() {
-          dynamic result = json.decode(value);
-          facematchURI =  result["Image"];
-          if( result.toString().contains("score")){
-            Score =  result["score"];
+          _result = json.decode(value);
+          facematchURI = _result["Image"];
+          if(_result.toString().contains("score")){
+            Score = _result["score"];
           }
-          print("RESULT:- $ result");
+          print("RESULT:- $_result");
         })
       }).onError((error, stackTrace)=>{});
     } on PlatformException {}
@@ -453,14 +470,14 @@ _For gallery 2_
         "face1": this.facematchURI,
         "face2": this.facematchURI2
       };
-      await AccuraSdk.getGallery2([accuraConfs]).then((value) => {
+      await AccuraOcr.getGallery2([accuraConfs]).then((value) => {
         setState(() {
-         dynamic result = json.decode(value);
-          facematchURI2 = result["Image"];
-          if(result.toString().contains("score")){
-            Score = result["score"];
+          _result = json.decode(value);
+          facematchURI2 = _result["Image"];
+          if(_result.toString().contains("score")){
+            Score = _result["score"];
           }
-          print("RESULT:- $result");
+          print("RESULT:- $_result");
         })
       }).onError((error, stackTrace)=>{});
     } on PlatformException {}
@@ -478,29 +495,29 @@ _For Facematch 1:_
         "face1": this.facematchURI,
         "face2": this.facematchURI2
       };
-      await AccuraSdk.setFaceMatchFeedbackTextSize(18);
-      await AccuraSdk.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraSdk.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraSdk.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraSdk.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraSdk.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraSdk.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraSdk.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraSdk.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraSdk.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraSdk.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraSdk.setBlurPercentage(80);
-      await AccuraSdk.setFaceMatchGlarePercentage_0(-1);
-      await AccuraSdk.setFaceMatchGlarePercentage_1(-1);
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
+      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
+      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
+      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
+      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
+      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraFacematch.setFaceMatchBlurPercentage(80);
+      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
+      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
 
-      await AccuraSdk.getCamera1([accuraConfs]).then((value) => {
+      await AccuraFacematch.getCamera1([accuraConfs]).then((value) => {
         setState(() {
-          dynamic result = json.decode(value);
-          facematchURI = result["Image"];
-          if(result.toString().contains("score")){
-            Score = result["score"];
+          _result = json.decode(value);
+          facematchURI = _result["Image"];
+          if(_result.toString().contains("score")){
+            Score = _result["score"];
           }
-          print("RESULT:- $result");
+          print("RESULT:- $_result");
         })
       });
     } on PlatformException {}
@@ -518,31 +535,31 @@ _For Facematch 2_
         "face2": this.facematchURI2
       };
 
-      await AccuraSdk.setFaceMatchFeedbackTextSize(18);
-      await AccuraSdk.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraSdk.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraSdk.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraSdk.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraSdk.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraSdk.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraSdk.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraSdk.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraSdk.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraSdk.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraSdk.setBlurPercentage(80);
-      await AccuraSdk.setFaceMatchGlarePercentage_0(-1);
-      await AccuraSdk.setFaceMatchGlarePercentage_1(-1);
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
+      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
+      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
+      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
+      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
+      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
+      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
+      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
+      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
+      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
+      await AccuraFacematch.setFaceMatchBlurPercentage(80);
+      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
+      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
 
-      await AccuraSdk.getCamera2([accuraConfs]).then((value) => {
+      await AccuraFacematch.getCamera2([accuraConfs]).then((value) => {
         setState(() {
-          dynamic result = json.decode(value);
-          facematchURI2 = result["Image"];
-          if(result.toString().contains("score")){
-            Score = result["score"];
+          _result = json.decode(value);
+          facematchURI2 = _result["Image"];
+          if(_result.toString().contains("score")){
+            Score = _result["score"];
           }
-          print("RESULT:- $result");
+          print("RESULT:- $_result");
         })
-      });//.onError((error, stackTrace)=>{print("Not Printing")});
+      });
     } on PlatformException {}
     if(!mounted) return;
   }

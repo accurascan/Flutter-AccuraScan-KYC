@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:accura_sdk/accura_sdk.dart';
+import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 import 'package:flutterkyc/ResultScreen.dart';
 
 class CardList extends StatefulWidget {
@@ -32,7 +32,7 @@ class _CardListState extends State<CardList> {
         cardSelected['type'],
       ];
       print("startOcr: $config");
-      await AccuraSdk.startOcrWithCard(config)
+      await AccuraOcr.startOcrWithCard(config)
           .then((value) =>
       {
         setState(() {
