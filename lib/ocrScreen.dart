@@ -100,6 +100,13 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.ACCURA_ERROR_CODE_UPSIDE_DOWN_SIDE("Document is upside down. Place it properly");
       await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
       await AccuraOcr.isShowLogo(0);
+      await AccuraOcr.isFlipImg(1);
+      await AccuraOcr.CameraScreen_Color("#80000000");   //Pass empty string for clear color else pass the Hex code e.g, #FFFFFF.
+      await AccuraOcr.CameraScreen_Back_Button(1); //For iOS disable the back button by Passing 0.
+      await AccuraOcr.CameraScreen_Change_Button(1); //To disable flip camera button pass 0.
+      await AccuraOcr.CameraScreen_Frame_Color("#D5323F"); //Pass a Hex Code to change the color of the frame.
+      await AccuraOcr.CameraScreen_Text_Border_Color(""); //Pass a Hex Code to change the color of the text border pass empty string to disable it.
+      await AccuraOcr.CameraScreen_Text_Color("#FFFFFF"); //Pass a Hex Code to change the color of the text.
 
       await AccuraOcr.setAccuraConfigs().then((value) => {
         setState((){
