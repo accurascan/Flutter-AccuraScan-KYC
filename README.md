@@ -152,6 +152,8 @@ Place both the license in your project's Runner directory, and add the licenses 
       await AccuraOcr.setMaxGlarePercentage(99);
       await AccuraOcr.setBlurPercentage(60);
       await AccuraOcr.setCameraFacing(0);
+      await AccuraOcr.Disable_Card_Name(false);
+      await AccuraOcr.EnableLogs(false);
 
       await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
       await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");

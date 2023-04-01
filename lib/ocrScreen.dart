@@ -71,6 +71,8 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.setBlurPercentage(60);
       await AccuraOcr.setCameraFacing(0);
       await AccuraOcr.isCheckPhotoCopy(false);
+      await AccuraOcr.Disable_Card_Name(false);
+      await AccuraOcr.EnableLogs(false);
 
       await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
       await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
@@ -80,7 +82,6 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.SCAN_TITLE_DLPLATE("Scan Number plate");
       await AccuraOcr.SCAN_TITLE_BARCODE("Scan Barcode");
       await AccuraOcr.SCAN_TITLE_BANKCARD("Scan BankCard");
-
 
       await AccuraOcr.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
       await AccuraOcr.ACCURA_ERROR_CODE_DOCUMENT_IN_FRAME("Keep document in frame");
