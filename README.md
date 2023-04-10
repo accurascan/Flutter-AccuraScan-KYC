@@ -185,7 +185,7 @@ Place both the license in your project's Runner directory, and add the licenses 
       await AccuraOcr.isShowLogo(0);
       await AccuraOcr.isFlipImg(1);
       
-      await AccuraOcr.setFlipImage(MyApp.path);//pass the path of the Image for example check main.dart _shareFlipImage() Function
+      await AccuraOcr.setFlipImage("Your Image Path");//pass the path of the Image for example check main.dart _shareFlipImage() Function
       await AccuraOcr.CameraScreen_CornerBorder_Enable(true); //To enable corner Only frame
       await AccuraOcr.CameraScreen_Border_Width(10); // To set the width of the frame
       
