@@ -184,6 +184,11 @@ Place both the license in your project's Runner directory, and add the licenses 
       await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
       await AccuraOcr.isShowLogo(0);
       await AccuraOcr.isFlipImg(1);
+      
+      await AccuraOcr.setFlipImage(MyApp.path);//pass the path of the Image for example check main.dart _shareFlipImage() Function
+      await AccuraOcr.CameraScreen_CornerBorder_Enable(true); //To enable corner Only frame
+      await AccuraOcr.CameraScreen_Border_Width(10); // To set the width of the frame
+      
       await AccuraOcr.CameraScreen_Color("#80000000");   //Pass empty string for clear color else pass the Hex code e.g, #FFFFFF.
       await AccuraOcr.CameraScreen_Back_Button(1); //For iOS disable the back button by Passing 0.
       await AccuraOcr.CameraScreen_Change_Button(1); //To disable flip camera button pass 0.

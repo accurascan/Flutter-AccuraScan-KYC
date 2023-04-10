@@ -34,7 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_accurascan_kyc: ^3.0.7
+  flutter_accurascan_kyc: ^3.0.9
+  path_provider: ^2.0.11
 
 
 dev_dependencies:
@@ -72,6 +73,7 @@ flutter:
     - assets/images/OCR.jpg
     - assets/images/bg_home.png
     - assets/images/image.png
+    - assets/images/flip.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
