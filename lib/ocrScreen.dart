@@ -17,6 +17,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  static String path = "";
   const MyApp({super.key});
   @override
   State<MyApp> createState() => _MyAppState();
@@ -108,6 +109,9 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.CameraScreen_Frame_Color("#D5323F"); //Pass a Hex Code to change the color of the frame.
       await AccuraOcr.CameraScreen_Text_Border_Color(""); //Pass a Hex Code to change the color of the text border pass empty string to disable it.
       await AccuraOcr.CameraScreen_Text_Color("#FFFFFF"); //Pass a Hex Code to change the color of the text.
+      await AccuraOcr.CameraScreen_CornerBorder_Enable(true);
+      await AccuraOcr.CameraScreen_Border_Width(15);
+      await AccuraOcr.setFlipImage(MyApp.path);
 
       await AccuraOcr.setAccuraConfigs().then((value) => {
         setState((){
@@ -167,7 +171,6 @@ class _MyAppState extends State<MyApp> {
   Future<void> startMRZ() async {
     try {
       var config = [
-        {"enableLogs": false},
         mrzselected,
       ];
       print('startMRZ:- $config');

@@ -184,6 +184,8 @@ Place both the license in your project's Runner directory, and add the licenses 
       await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
       await AccuraOcr.isShowLogo(0);
       await AccuraOcr.isFlipImg(1);
+      await AccuraOcr.CameraScreen_CornerBorder_Enable(false);
+      await AccuraOcr.CameraScreen_Border_Width(15);
       await AccuraOcr.CameraScreen_Color("#80000000");   //Pass empty string for clear color else pass the Hex code e.g, #FFFFFF.
       await AccuraOcr.CameraScreen_Back_Button(1); //For iOS disable the back button by Passing 0.
       await AccuraOcr.CameraScreen_Change_Button(1); //To disable flip camera button pass 0.
@@ -204,7 +206,6 @@ Place both the license in your project's Runner directory, and add the licenses 
 Future<void> startMRZ() async {
  try {
    var config = [
-     {"enableLogs": false},
      mrzselected,
    ];
    await AccuraOcr.startMRZ(config)
@@ -246,7 +247,6 @@ Future<void> startMRZ() async {
 Future<void> startOCR() async {
  try {
    var config = [
-     {"enableLogs": false},
      widget.countrySelect['id'],
      cardSelected['id'],
      cardSelected['name'],

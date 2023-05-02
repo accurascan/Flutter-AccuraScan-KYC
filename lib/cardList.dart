@@ -27,7 +27,6 @@ class _CardListState extends State<CardList> {
   Future<void> startOCR() async {
     try {
       var config = [
-        {"enableLogs": false},
         widget.countrySelect['id'],
         cardSelected['id'],
         cardSelected['name'],

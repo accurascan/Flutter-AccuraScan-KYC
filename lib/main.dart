@@ -1,6 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterkyc/FaceMatch.dart';
 import 'package:flutterkyc/ocrScreen.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 
@@ -23,6 +28,27 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _shareFlipImage();
+  }
+
+  _shareFlipImage() async {
+    try {
+      final ByteData bytes = await rootBundle.load('assets/images/flip.png');
+      final Uint8List list = bytes.buffer.asUint8List();
+
+      final tempDir = await getTemporaryDirectory();
+      final file = await File('${tempDir.path}/flip.png').create();
+      file.writeAsBytesSync(list);
+      String file1 = file.toString();
+      String ggg = file1.replaceAll("File: '", "");
+      String fff = ggg.replaceAll("'", "");
+      String filePath = "file://$fff";
+      setState(() {
+        MyApp.path = filePath;
+      });
+    } catch (e) {
+      print('Share error: $e');
+    }
   }
 
   @override
