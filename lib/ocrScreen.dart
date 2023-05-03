@@ -233,7 +233,10 @@ class _MyAppState extends State<MyApp> {
                     child: Container(
                       child:
                       sdkConfig == null
-                          ? Center(child: CircularProgressIndicator())
+                          ? Container(
+                              height:MediaQuery.of(context).size.height,
+                              child: Center(child: CircularProgressIndicator()),
+                      )
                           : !sdkConfig["isValid"]
                           ?
                       Column(
