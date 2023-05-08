@@ -1,3 +1,7 @@
+## 3.1.8
+* Android: Reduce the Camera border size
+* iOS: Reduce the Camera border size
+
 ## 3.1.7
 * Android: Resolve Build issue
 * iOS: NA
