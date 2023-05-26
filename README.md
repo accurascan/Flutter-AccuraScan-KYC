@@ -11,7 +11,7 @@ Accura Scan Authentication is used for your customer verification and authentica
 Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
-Add `flutter_accurascan_kyc:3.1.8` under dependencies in your pubspec.yaml file.
+Add `flutter_accurascan_kyc:3.1.9` under dependencies in your pubspec.yaml file.
 **Usage**
 Import flutter library into file.
 `import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';`
@@ -34,6 +34,8 @@ allprojects {
    repositories {
        google()
        jcenter()
+       maven { url 'https://jitpack.io/' }  //For Huawei OCR
+       maven { url 'https://developer.huawei.com/repo/' } //For Huawei OCR
        maven {
            url 'https://jitpack.io'
            credentials { username 'jp_ssguccab6c5ge2l4jitaj92ek2' }
