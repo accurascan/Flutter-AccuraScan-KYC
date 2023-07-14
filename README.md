@@ -379,7 +379,7 @@ score: Float
 
 
 ## 9.Method for liveness check.
-
+Please refer this [pdf](https://github.com/accurascan/Flutter-AccuraScan-KYC/blob/master/Docker_Installation_Liveness.pdf) to get the liveness url. 
    ```
 Future<void> startLiveness() async{
  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
