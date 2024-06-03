@@ -97,7 +97,7 @@ This license is use for get face match percentages between two face pictures.
 Create "assets" folder under app/src/main and Add license file in to assets folder.
 - key.license // for Accura Scan OCR
 - accuraface.license // for Accura Scan Face Match
-Generate your Accura Scan license from https://accurascan.com/developer/dashboard
+Generate your Accura Scan license from https://sandbox.accurascan.com/
 ```
 **For iOS**
 ```
