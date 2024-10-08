@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Accura KYC"),
+        title: const Text("Accura KYC",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.red[800],
       ),
       body: Container(

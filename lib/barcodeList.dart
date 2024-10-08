@@ -35,7 +35,7 @@ class _BarcodeListState extends State<BarcodeList> {
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text("Accura KYC"),
+          title: Text("Accura KYC",style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.red[800],
         ),
         resizeToAvoidBottomInset: true,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
@@ -7,6 +8,7 @@ import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 import 'package:flutterkyc/ResultScreen.dart';
 import 'package:flutterkyc/barcodeList.dart';
 import 'package:flutterkyc/cardList.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 void main() {
@@ -50,8 +52,70 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    getMetaData();
+    // getMetaData();
+    getMetaData2();
   }
+
+  Future<String> downloadFile(String url) async {
+    try {
+      // Get the file name from the URL
+      String fileName = url.split('/').last;
+
+      // Get the directory to store the file
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+      String appDocPath = appDocDir.path;
+
+      String destinationPath = '$appDocPath/$fileName';
+
+      // Check if the file already exists
+      File file = File(destinationPath);
+      if (await file.exists()) {
+        print('File already exists at: $destinationPath');
+        return destinationPath;
+      }
+
+      // If file doesn't exist, download it
+      Dio dio = Dio();
+      Response response = await dio.download(url, destinationPath);
+
+      if (response.statusCode == 200) {
+        print('File downloaded to: $destinationPath');
+        return destinationPath;
+      } else {
+        print('Failed to download file');
+        throw Exception('Failed to download file');
+      }
+    } catch (error) {
+      print('Error downloading file: $error');
+      throw error;
+    }
+  }
+
+  Future<void> getMetaData2() async{
+    String iosUrl = 'URL';
+    String androidUrl = 'URL';
+
+    String faceiosUrl = 'URL';
+    String faceandroidUrl = 'URL';
+
+    String url = Platform.isIOS ? iosUrl : androidUrl;
+    String faceurl = Platform.isIOS ? faceiosUrl : faceandroidUrl;
+    try {
+      print("license downloading...");
+      String filePath = await downloadFile(url);
+      String facefilePath = await downloadFile(faceurl);
+      // print('File URI: $filePath');
+      var config = {
+        'licensePath': filePath,
+        'faceLicensePath': facefilePath
+      };
+
+      await AccuraOcr.getDynamicMetaData(config).then((value) =>
+          setupConfigData(json.decode(value)));
+    }on PlatformException{}
+    if (!mounted) return;
+  }
+
 
   Future<void> getMetaData() async{
     try {
@@ -73,7 +137,6 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.setCameraFacing(0);
       await AccuraOcr.isCheckPhotoCopy(false);
       await AccuraOcr.Disable_Card_Name(false);
-      await AccuraOcr.EnableLogs(false);
 
       await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
       await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
@@ -202,7 +265,7 @@ class _MyAppState extends State<MyApp> {
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              title: Text("Accura KYC"),
+              title: Text("Accura KYC",style: TextStyle(color: Colors.white)),
               actions: [TextButton(onPressed: (){
                 count = count + 1;
                 if(count%2 != 0){

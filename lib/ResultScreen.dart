@@ -126,7 +126,7 @@ class _ResultScreenState extends State<ResultScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text("Accura Result"),
+        title: Text("Accura Result",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.red[800],
       ),
       body: Container(
@@ -209,10 +209,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(5.0),
-                          ),
+                          ), backgroundColor: Colors.red[800],
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 20, left: 20),
-                          primary: Colors.red[800]),
+                              top: 10, bottom: 10, right: 20, left: 20)),
                       child: Row(
                         children: [
                           Image.asset(
@@ -263,10 +262,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(5.0),
-                          ),
+                          ), backgroundColor: Colors.red[800],
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 20, left: 20),
-                          primary: Colors.red[800]),
+                              top: 10, bottom: 10, right: 20, left: 20)),
                       child: Row(
                         children: [
                           Image.asset(

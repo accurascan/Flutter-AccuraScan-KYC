@@ -58,7 +58,7 @@ class _CardListState extends State<CardList> {
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text("Accura KYC"),
+          title: const Text("Accura KYC",style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.red[800],
         ),
         resizeToAvoidBottomInset: true,

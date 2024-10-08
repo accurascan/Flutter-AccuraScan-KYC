@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_accurascan_kyc: 4.1.5
   path_provider: ^2.0.11
-
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:
