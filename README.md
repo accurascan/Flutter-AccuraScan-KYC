@@ -108,12 +108,16 @@ Place both the license in your project's Runner directory, and add the licenses 
 
 ## 4.Get license configuration from SDK. It returns all active functionalities of your license.
 
-### Setting up License
+### Setting up Dynamic License
 ```
   Future<void> getMetaData() async{
+      var config = {
+        'licensePath': filePath,
+        'faceLicensePath': facefilePath
+      };
     try {
-      await AccuraOcr.getMetaData().then((value) =>
-          setupConfigData(json.decode(value)));
+        await AccuraOcr.getDynamicMetaData(config).then((value) =>
+              setupConfigData(json.decode(value)));
     }on PlatformException{}
     if (!mounted) return;
   }
