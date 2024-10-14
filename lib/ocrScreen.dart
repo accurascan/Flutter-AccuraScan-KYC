@@ -73,7 +73,12 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.setCameraFacing(0);
       await AccuraOcr.isCheckPhotoCopy(false);
       await AccuraOcr.Disable_Card_Name(false);
-      await AccuraOcr.EnableLogs(false);
+
+      await AccuraOcr.setIsDocEnable(true); //set false to disable Document Liveness
+      await AccuraOcr.setDocUrl("Your URL"); //Add you Document Liveness URL
+      await AccuraOcr.setProgressMessage("DocLiveness Calling..."); //Add Loading Text
+      await AccuraOcr.setApiTimer(10); // Set the API calling timer
+      await AccuraOcr.setHideProgressDialogue(false); //true to disable Progress Dialogue
 
       await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
       await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
