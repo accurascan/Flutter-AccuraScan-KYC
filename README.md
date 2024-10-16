@@ -11,7 +11,7 @@ Accura Scan Authentication is used for your customer verification and authentica
 Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
-Add `flutter_accurascan_kyc: 4.1.6` under dependencies in your pubspec.yaml file.
+Add `flutter_accurascan_kyc: 4.1.6-NFC` under dependencies in your pubspec.yaml file.
 **Usage**
 Import flutter library into file.
 `import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';`
@@ -35,7 +35,6 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io/' }
-        maven { url 'https://developer.huawei.com/repo/' } // Add Huawei Maven
         maven {
             url 'https://jitpack.io'
             credentials { username 'jp_ssguccab6c5ge2l4jitaj92ek2' }
@@ -78,6 +77,14 @@ packagingOptions {
 <string>App usage photos for get document picture.</string>
 <key>NSPhotoLibraryAddUsageDescription</key>
 <string>App usage photos for save document picture.</string>
+<key>NFCReaderUsageDescription</key>
+<string>App requires NFC access</string>
+<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+<array>
+    <string>A0000002471001</string>
+    <string>A0000002472001</string>
+    <string>00000000000000</string>
+</array>
 ```
 
 ## 3.Setup Accura Scan licenses into your projects
@@ -243,8 +250,27 @@ Future<void> startMRZ() async {
 
 **Error:** String
 
+## 6.Method to start Passport NFC.
 
-## 6.Method for scan OCR documents.
+```
+// Add your Passport No. , Date of Birth(ddmmyy), Date of expiry(ddmmyy) in the below format and order(String).
+      var passArgs = [
+        widget.passportNo,
+        dobToPass,
+        doeToPass,
+      ];
+
+      // Start NFC process using the method channel
+      await AccuraOcr.startNFC(passArgs).then((response) {
+        print("NFC Result: $response");
+      }).catchError((error) {
+        print("NFC error: $error");
+      });
+    } on PlatformException {}
+```
+
+
+## 7.Method for scan OCR documents.
    ```
 Future<void> startOCR() async {
  try {
@@ -290,7 +316,7 @@ Future<void> startOCR() async {
 **Error:** String
 
 
-## 7.Method for scan barcode.
+## 8.Method for scan barcode.
    ```
 Future<void> startBarcode() async{
  var config= barcodeSelected;
@@ -312,7 +338,7 @@ Future<void> startBarcode() async{
 **Error:** String
 
 
-## 8.Method for scan bankcard.
+## 9.Method for scan bankcard.
 
    ```
 Future<void> startBankCard() async{
@@ -332,7 +358,7 @@ Future<void> startBankCard() async{
 
 **Error:** String
 
-## 8.Method for get face match percentages between two face.
+## 10.Method for get face match percentages between two face.
    ```
 Future<void> startFaceMatch() async{
  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -380,7 +406,7 @@ score: Float
 **Error:** String
 
 
-## 9.Method for liveness check.
+## 11.Method for liveness check.
 Please refer this [pdf](https://github.com/accurascan/Flutter-AccuraScan-KYC/blob/master/Docker_Installation_Liveness.pdf) to get the liveness url. 
    ```
 Future<void> startLiveness() async{
@@ -437,152 +463,6 @@ score: Float,
 
 **Error:** String
 
-
-## 10.Method for Only Facematch.(The following are Optional methods, Use if you need only FaceMatch)
-### To Open Gallery 1 and 2:-
-
-_For gallery 1_
-
-   ```
-  Future<void> openGallery() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-
-      await AccuraOcr.getGallery1([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      }).onError((error, stackTrace)=>{});
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-_For gallery 2_
-```
-  Future<void> openGallery2() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-      await AccuraOcr.getGallery2([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI2 = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      }).onError((error, stackTrace)=>{});
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-### To Open Camera for Facematch 1 and 2:
-
-_For Facematch 1:_
-```
-  Future<void> openCamera() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
-      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraFacematch.setFaceMatchBlurPercentage(80);
-      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
-      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
-
-      await AccuraFacematch.getCamera1([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      });
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-_For Facematch 2_
-
-```
-  Future<void> openCamera2() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-
-      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
-      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraFacematch.setFaceMatchBlurPercentage(80);
-      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
-      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
-
-      await AccuraFacematch.getCamera2([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI2 = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      });
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-**accuraConfs:** JSON Object
-
-**Face1:** 'uri of face1'
-
-**Face2:** ’uri of face2’
-
-**Success:** JSON Response {
-
-**Image:** URI?,
-
-**score:** String,
-}
-
-**Error:** String
 
 
 Contributing
