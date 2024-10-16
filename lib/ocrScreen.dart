@@ -37,9 +37,9 @@ class _MyAppState extends State<MyApp> {
   String orientation = 'portrait';
   List<Map<String, dynamic>> mrzList = [
     {"label": "Passport", "value": "passport_mrz"},
-    {"label": "Mrz ID", "value": "id_mrz"},
-    {"label": "Visa Card", "value": "visa_mrz"},
-    {"label": "Other", "value": "other_mrz"}
+    // {"label": "Mrz ID", "value": "id_mrz"},
+    // {"label": "Visa Card", "value": "visa_mrz"},
+    // {"label": "Other", "value": "other_mrz"}
   ];
 
   List<String> listOfCountryandMrz = [''];
@@ -73,7 +73,6 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.setCameraFacing(0);
       await AccuraOcr.isCheckPhotoCopy(false);
       await AccuraOcr.Disable_Card_Name(false);
-      await AccuraOcr.EnableLogs(false);
 
       await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
       await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
@@ -141,28 +140,28 @@ class _MyAppState extends State<MyApp> {
     if(sdkConfig["isValid"] == true){
       setAccuraConfig();
       List<String> tempList3=[];
-      List barcodeData = [];
+      // List barcodeData = [];
 
-      List countryData = obj['countryList'];
+      // List countryData = obj['countryList'];
       if(sdkConfig['isMRZEnable']) {
         for (var item in mrzList) {
           tempList3.add(item['label']);
         }
       }
-      if(sdkConfig['isBankCardEnable']){
-        tempList3.add('Bank Card');
-      }
-      if(sdkConfig['isBarcodeEnable']) {
-        tempList3.add("Barcode");
-        barcodeData = obj["barcodes"];
-      }
-
-      for (var item in countryData) {
-        tempList3.add(item['name']);
-      }
+      // if(sdkConfig['isBankCardEnable']){
+      //   tempList3.add('Bank Card');
+      // }
+      // if(sdkConfig['isBarcodeEnable']) {
+      //   tempList3.add("Barcode");
+      //   barcodeData = obj["barcodes"];
+      // }
+      //
+      // for (var item in countryData) {
+      //   tempList3.add(item['name']);
+      // }
 
       setState((){
-        barcodeList = barcodeData;
+        // barcodeList = barcodeData;
         listOfCountryandMrz = tempList3;
       });
     }

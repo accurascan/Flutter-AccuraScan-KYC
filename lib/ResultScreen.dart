@@ -7,11 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';
 
+import 'CustomPopup.dart';
+
+
 class ResultScreen extends StatefulWidget {
+
   const ResultScreen({Key? key}) : super(key: key);
   static dynamic result = {'isValid':false};
   static String Orientation = "";
-
+  static bool isPassport = false;
+  static dynamic mrzData;
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -25,10 +30,39 @@ class _ResultScreenState extends State<ResultScreen> {
   String matchFileURL = '';
   String livenessScore = '0.0';
   String faceMatchScore = '0.0';
+
+
+  bool _isPopupVisible = true;
+  String _passportNo = "";
+  String _dob = "";
+  String _doe = "";
+
+  void _handleNFCResult(Map<String, dynamic> result) {
+    // Handle the NFC result here
+    print('NFC Result: $result');
+  }
+
+
   @override
   void initState() {
     setState((){
       faceMatchURL = ResultScreen.result['face'].toString();
+
+
+      // Extract MRZ data if the result contains it
+      if (ResultScreen.result['mrz_data'] != null) {
+        _passportNo = ResultScreen.result['mrz_data']['Document No.'] ?? "";
+        _dob = ResultScreen.result['mrz_data']['Date of Birth'] ?? "";
+        _doe = ResultScreen.result['mrz_data']['Date of Expiry'] ?? "";
+      }
+
+      // Show the popup if it's a passport MRZ
+      if (ResultScreen.isPassport) {
+        setState(() {
+          _isPopupVisible = true;
+        });
+      }
+
     });
   }
 
@@ -39,7 +73,10 @@ class _ResultScreenState extends State<ResultScreen> {
         "face_uri":this.faceMatchURL
       };
 
-      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
+      await AccuraFacematch.setFaceMatchFeedbackTextSize(24);
+      await AccuraFacematch.isShowLogofm(0);
+      await AccuraFacematch.setFacematchfeedbackTextColor("#000000");
+
       await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
       await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
       await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
@@ -67,9 +104,9 @@ class _ResultScreenState extends State<ResultScreen> {
           faceMatchScore = _result['score'].toString();
         })
       }).onError((error, stackTrace) => {
-      if(ResultScreen.Orientation  == "landscape"){
+        if(ResultScreen.Orientation  == "landscape"){
           SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
-    }
+        }
       });
     }on PlatformException{}
   }
@@ -80,7 +117,10 @@ class _ResultScreenState extends State<ResultScreen> {
         "face_uri":this.faceMatchURL
       };
 
-      await AccuraLiveness.setLivenessFeedbackTextSize(18);
+      await AccuraLiveness.setLivenessFeedbackTextSize(24);
+      await AccuraLiveness.setLivenessfeedbackTextColor("#000000");
+      await AccuraLiveness.setDefaultText("Keep face In Frame \n Face Must Be Near To Camera");
+      await AccuraLiveness.isShowLogoLv(0);
       await AccuraLiveness.setLivenessFeedBackframeMessage("Frame Your Face");
       await AccuraLiveness.setLivenessFeedBackAwayMessage("Move Phone Away");
       await AccuraLiveness.setLivenessFeedBackOpenEyesMessage("Keep Your Eyes Open");
@@ -95,7 +135,7 @@ class _ResultScreenState extends State<ResultScreen> {
       await AccuraLiveness.setLivenessGlarePercentage_1(-1);
       await AccuraLiveness.setLivenessFeedBackLowLightMessage("Low light detected");
       await AccuraLiveness.setLivenessfeedbackLowLightTolerence(39);
-      await AccuraLiveness.setLivenessURL("your liveness url");
+      await AccuraLiveness.setLivenessURL("Your URL");
 
 
 
@@ -109,16 +149,18 @@ class _ResultScreenState extends State<ResultScreen> {
           print("result: $_result");
           matchFileURL= _result['detect'].toString();
           livenessScore = _result['score'].toString();
-          faceMatchScore = _result['face_score'].toString();
+          if (_result['face_score'] != null) {
+            faceMatchScore = _result['face_score'].toString();
+          }
         })
       }).onError((error, stackTrace) => {
-      if(ResultScreen.Orientation  == "landscape"){
+        if(ResultScreen.Orientation  == "landscape"){
           SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
-    }
+        }
       });
     }on PlatformException{}
   }
-  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -129,35 +171,66 @@ class _ResultScreenState extends State<ResultScreen> {
         title: Text("Accura Result"),
         backgroundColor: Colors.red[800],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: SingleChildScrollView(
-                controller: scrollController,
-                scrollDirection: Axis.vertical,
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Column(children: [
-                          getImageOnDocument(),
-                          getDataWidgets(),
-                          getMRZDataWidgets(),
-                          getImagesWidgets(),
-                        ]),
-                      ),
-                    ],
+      body: Stack(
+        children: [
+          // The main content
+          Container(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 12,
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        getImageOnDocument(),
+                        getDataWidgets(),
+                        getMRZDataWidgets(),
+                        getImagesWidgets(),
+                      ],
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          // Semi-transparent overlay
+          if (_isPopupVisible)
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: () {
+                  // Optional: Dismiss the popup if the user taps outside of it
+                  setState(() {
+                    _isPopupVisible = false;
+                  });
+                },
+                child: Container(
+                  color: Colors.black.withOpacity(0.5), // Adjust opacity as needed
+                ),
               ),
-            )
-          ],
-        ),
+            ),
+          // Custom Popup
+          if (_isPopupVisible)
+            Center(
+              child: CustomPopup(
+                isVisible: _isPopupVisible,
+                onClose: () {
+                  setState(() {
+                    _isPopupVisible = false;
+                  });
+                },
+                passportNo: _passportNo,
+                dob: _dob,
+                doe: _doe,
+                onNFCResult: _handleNFCResult,
+              ),
+            ),
+        ],
       ),
     );
   }
+
 
   //Code for display face images.
   Widget getImageOnDocument() {
@@ -176,10 +249,10 @@ class _ResultScreenState extends State<ResultScreen> {
                   height: 150,
                   width: 100,
                   child: Image.file(
-                    new File(ResultScreen.result['face']
-                        .toString()
-                        .replaceAll('file:///', '')),
-                    fit: BoxFit.cover
+                      new File(ResultScreen.result['face']
+                          .toString()
+                          .replaceAll('file:///', '')),
+                      fit: BoxFit.cover
                   ),
                 ),
                 matchFileURL != ''
@@ -209,10 +282,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(5.0),
-                          ),
+                          ), backgroundColor: Colors.red[800],
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 20, left: 20),
-                          primary: Colors.red[800]),
+                              top: 10, bottom: 10, right: 20, left: 20)),
                       child: Row(
                         children: [
                           Image.asset(
@@ -238,7 +310,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       child: livenessScore != ''
                           ? Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
@@ -246,7 +318,7 @@ class _ResultScreenState extends State<ResultScreen> {
                                 .toStringAsFixed(2)
                                 .toString() +
                                 "%",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
@@ -263,10 +335,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(5.0),
-                          ),
+                          ), backgroundColor: Colors.red[800],
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 20, left: 20),
-                          primary: Colors.red[800]),
+                              top: 10, bottom: 10, right: 20, left: 20)),
                       child: Row(
                         children: [
                           Image.asset(

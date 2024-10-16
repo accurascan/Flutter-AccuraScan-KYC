@@ -1,8 +1,11 @@
 PODS:
-  - AccuraKYC_Sim (3.2.2):
-    - AFNetworking (~> 3.2.1)
+  - AccuraLiveness_FM (4.2.1):
+    - AFNetworking (= 3.2.1)
+    - GoogleMLKit
+    - JGProgressHUD
+  - AccuraOCR (1.0.0.0):
     - GoogleMLKit (= 3.2.0)
-    - SVProgressHUD
+    - NFCPassportReader
   - AFNetworking (3.2.1):
     - AFNetworking/NSURLSession (= 3.2.1)
     - AFNetworking/Reachability (= 3.2.1)
@@ -20,7 +23,8 @@ PODS:
     - AFNetworking/NSURLSession
   - Flutter (1.0.0)
   - flutter_accurascan_kyc (0.0.1):
-    - AccuraKYC_Sim (= 3.2.2)
+    - AccuraLiveness_FM (= 4.2.1)
+    - AccuraOCR (= 1.0.0.0)
     - Flutter
   - GoogleDataTransport (9.2.1):
     - GoogleUtilities/Environment (~> 7.7)
@@ -54,6 +58,7 @@ PODS:
   - GoogleUtilitiesComponents (1.1.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.2)
+  - JGProgressHUD (2.2)
   - MLKitCommon (8.0.0):
     - GoogleDataTransport (~> 9.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
@@ -68,21 +73,24 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - NFCPassportReader (2.0.2):
+    - OpenSSL-Universal (= 1.1.1900)
+  - OpenSSL-Universal (1.1.1900)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.1.1)
   - Protobuf (3.21.12)
-  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_accurascan_kyc (from `.symlinks/plugins/flutter_accurascan_kyc/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
 
 SPEC REPOS:
   trunk:
-    - AccuraKYC_Sim
+    - AccuraLiveness_FM
+    - AccuraOCR
     - AFNetworking
     - GoogleDataTransport
     - GoogleMLKit
@@ -90,11 +98,13 @@ SPEC REPOS:
     - GoogleUtilities
     - GoogleUtilitiesComponents
     - GTMSessionFetcher
+    - JGProgressHUD
     - MLKitCommon
     - nanopb
+    - NFCPassportReader
+    - OpenSSL-Universal
     - PromisesObjC
     - Protobuf
-    - SVProgressHUD
 
 EXTERNAL SOURCES:
   Flutter:
@@ -102,26 +112,29 @@ EXTERNAL SOURCES:
   flutter_accurascan_kyc:
     :path: ".symlinks/plugins/flutter_accurascan_kyc/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
 SPEC CHECKSUMS:
-  AccuraKYC_Sim: 3de1de6b9041748ad000c642f5cac8d0b6debb42
+  AccuraLiveness_FM: 0c0342e862e4288c0bc36932bd3293cd163cf0ba
+  AccuraOCR: bd73b73a88ff74211f8be5ca474af79c26bc0feb
   AFNetworking: cb604b1c2bded0871f5f61f5d53653739e841d6b
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_accurascan_kyc: aec282ef215cb0236cb4f68077f7bb92c9ede0d1
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_accurascan_kyc: 2b60eb5e6546747ab372e2fbc5b7fdb82d93ac5d
   GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
   GoogleMLKit: 0017a6a8372e1a182139b9def4d89be5d87ca5a7
   GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   MLKitCommon: f6da6c5659618c070b50a80db01248ebe2964175
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  NFCPassportReader: 27ad053f0347c4abe65de1d0ebae4f3ee6e6578c
+  OpenSSL-Universal: 84efb8a29841f2764ac5403e0c4119a28b713346
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
 PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2

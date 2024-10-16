@@ -34,9 +34,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_accurascan_kyc: 4.1.5
+  flutter_accurascan_kyc: 4.1.6-NFC
   path_provider: ^2.0.11
-
+  syncfusion_flutter_datepicker: ^26.2.10
 
 dev_dependencies:
   flutter_test:

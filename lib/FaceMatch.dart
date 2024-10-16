@@ -169,10 +169,9 @@ class _FaceMatchState extends State<FaceMatch> {
                         style: ElevatedButton.styleFrom(
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
-                            ),
+                            ), backgroundColor: Colors.red[800],
                             padding: EdgeInsets.only(
-                                top: 10, bottom: 10, right: 20, left: 20),
-                            primary: Colors.red[800]),
+                                top: 10, bottom: 10, right: 20, left: 20)),
                         onPressed: (){
                       openGallery();
                     },
@@ -184,10 +183,9 @@ class _FaceMatchState extends State<FaceMatch> {
                         style: ElevatedButton.styleFrom(
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
-                            ),
+                            ), backgroundColor: Colors.red[800],
                             padding: EdgeInsets.only(
-                                top: 10, bottom: 10, right: 20, left: 20),
-                            primary: Colors.red[800]),
+                                top: 10, bottom: 10, right: 20, left: 20)),
                         onPressed: (){
                       openCamera();
                     },
@@ -218,10 +216,9 @@ class _FaceMatchState extends State<FaceMatch> {
                         style: ElevatedButton.styleFrom(
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
-                            ),
+                            ), backgroundColor: Colors.red[800],
                             padding: EdgeInsets.only(
-                                top: 10, bottom: 10, right: 20, left: 20),
-                            primary: Colors.red[800]),
+                                top: 10, bottom: 10, right: 20, left: 20)),
                         onPressed: (){
                       openGallery2();
                     },
@@ -233,10 +230,9 @@ class _FaceMatchState extends State<FaceMatch> {
                         style: ElevatedButton.styleFrom(
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
-                            ),
+                            ), backgroundColor: Colors.red[800],
                             padding: EdgeInsets.only(
-                                top: 10, bottom: 10, right: 20, left: 20),
-                            primary: Colors.red[800]),
+                                top: 10, bottom: 10, right: 20, left: 20)),
                         onPressed: (){
                       openCamera2();
                     },
