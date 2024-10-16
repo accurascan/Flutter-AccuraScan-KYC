@@ -68,6 +68,8 @@ packagingOptions {
 
 2.Run `pod install`
 
+Note: Add the NFC Entitlement in your target
+
 **Add this permissions into iOS Info.plist file.**
 
 ```
