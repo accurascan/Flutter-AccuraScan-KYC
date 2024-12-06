@@ -74,10 +74,6 @@ packagingOptions {
 ```
 <key>NSCameraUsageDescription</key>
 <string>App usage camera for scan documents.</string>
-<key>NSPhotoLibraryUsageDescription</key>
-<string>App usage photos for get document picture.</string>
-<key>NSPhotoLibraryAddUsageDescription</key>
-<string>App usage photos for save document picture.</string>
 ```
 
 ## 3.Setup Accura Scan licenses into your projects
@@ -95,9 +91,8 @@ This license is use for get face match percentages between two face pictures.
 
 ```
 Create "assets" folder under app/src/main and Add license file in to assets folder.
-- key.license // for Accura Scan OCR
-- accuraface.license // for Accura Scan Face Match
-To generate your Accura Scan license contact sales@accurascan.com
+- key-micr.license // for Accura Scan OCR
+
 ```
 **For iOS**
 ```
@@ -146,25 +141,10 @@ Place both the license in your project's Runner directory, and add the licenses 
  Future<void> setAccuraConfig() async{
     try {
 
-      await AccuraOcr.setFaceBlurPercentage(80);
-      await AccuraOcr.setHologramDetection(true);
       await AccuraOcr.setLowLightTolerance(10);
-      await AccuraOcr.setMotionThreshold(25);
       await AccuraOcr.setMinGlarePercentage(6);
       await AccuraOcr.setMaxGlarePercentage(99);
       await AccuraOcr.setBlurPercentage(60);
-      await AccuraOcr.setCameraFacing(0);
-      await AccuraOcr.Disable_Card_Name(false);
-      await AccuraOcr.EnableLogs(false);
-
-      await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
-      await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");
-      await AccuraOcr.SCAN_TITLE_OCR("Scan ");
-      await AccuraOcr.SCAN_TITLE_MRZ_PDF417_FRONT("Scan Front Side of Document");
-      await AccuraOcr.SCAN_TITLE_MRZ_PDF417_BACK("Scan Back Side of Document");
-      await AccuraOcr.SCAN_TITLE_DLPLATE("Scan Number plate");
-      await AccuraOcr.SCAN_TITLE_BARCODE("Scan Barcode");
-      await AccuraOcr.SCAN_TITLE_BANKCARD("Scan BankCard");
 
 
       await AccuraOcr.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
@@ -172,25 +152,20 @@ Place both the license in your project's Runner directory, and add the licenses 
       await AccuraOcr.ACCURA_ERROR_CODE_BRING_DOCUMENT_IN_FRAME("Bring card near to frame");
       await AccuraOcr.ACCURA_ERROR_CODE_PROCESSING("Processing");
       await AccuraOcr.ACCURA_ERROR_CODE_BLUR_DOCUMENT("Blur detect in document");
-      await AccuraOcr.ACCURA_ERROR_CODE_FACE_BLUR("Blur detected over face");
       await AccuraOcr.ACCURA_ERROR_CODE_GLARE_DOCUMENT("Glare detect in document");
-      await AccuraOcr.ACCURA_ERROR_CODE_HOLOGRAM("Hologram Detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_DARK_DOCUMENT("Low lighting detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_PHOTO_COPY_DOCUMENT("Can not accept Photo Copy Document");
-      await AccuraOcr.ACCURA_ERROR_CODE_FACE("Face not detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_MRZ("MRZ not detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_PASSPORT_MRZ("Passport MRZ not detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_ID_MRZ("ID MRZ not detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_VISA_MRZ("Visa MRZ not detected");
-      await AccuraOcr.ACCURA_ERROR_CODE_UPSIDE_DOWN_SIDE("Document is upside down. Place it properly");
       await AccuraOcr.ACCURA_ERROR_CODE_WRONG_SIDE("Scanning wrong side of Document");
-      await AccuraOcr.isShowLogo(0);
-      await AccuraOcr.isFlipImg(1);
+      await AccuraOcr.SCAN_TITLE_MICR("Scan MICR");
+      await AccuraOcr.ACCURA_ERROR_CODE_MICR_IN_FRAME("Keep MICR in Frame");
+      await AccuraOcr.ACCURA_ERROR_CODE_CLOSER("Move phone Closer");
+      await AccuraOcr.ACCURA_ERROR_CODE_AWAY("Move phone Away");
+      await AccuraOcr.CameraScreen_CornerBorder_Enable(true);
+      await AccuraOcr.CameraScreen_Border_Width(15);
+     
       await AccuraOcr.CameraScreen_CornerBorder_Enable(false);
       await AccuraOcr.CameraScreen_Border_Width(15);
       await AccuraOcr.CameraScreen_Color("#80000000");   //Pass empty string for clear color else pass the Hex code e.g, #FFFFFF.
       await AccuraOcr.CameraScreen_Back_Button(1); //For iOS disable the back button by Passing 0.
-      await AccuraOcr.CameraScreen_Change_Button(1); //To disable flip camera button pass 0.
+      
       await AccuraOcr.CameraScreen_Frame_Color("#D5323F"); //Pass a Hex Code to change the color of the frame.
       await AccuraOcr.CameraScreen_Text_Border_Color("#000000"); //Pass a Hex Code to change the color of the text border pass empty string to disable it.
       await AccuraOcr.CameraScreen_Text_Color("#FFFFFF"); //Pass a Hex Code to change the color of the text.
@@ -201,393 +176,3 @@ Place both the license in your project's Runner directory, and add the licenses 
   }
   
 ```
-
-## 5.Method for scan MRZ documents.
-
-   ```
-Future<void> startMRZ() async {
- try {
-   var config = [
-     mrzselected,
-   ];
-   await AccuraOcr.startMRZ(config)
-       .then((value) => {
-     setState((){
-       dynamic result = json.decode(value);
-     })
-   }).onError((error, stackTrace) => {
-   });
- } on PlatformException {}
-}
-```
-
-**MRZType:** String
-
-#### value: other_mrz or passport_mrz or id_mrz or visa_mrz<br></br>
-
-**Success:** JSON Response {
-
-**front_data:** JSONObjects?,
-
-**back_data:** JSONObjects?,
-
-**type:** Recognition Type,
-
-**face:** URI?
-
-**front_img:** URI?
-
-**back_img:** URI?
-
-}
-
-**Error:** String
-
-
-## 6.Method for scan OCR documents.
-   ```
-Future<void> startOCR() async {
- try {
-   var config = [
-     widget.countrySelect['id'],
-     cardSelected['id'],
-     cardSelected['name'],
-     cardSelected['type'],
-   ];
-   await AccuraOcr.startOcrWithCard(config)
-       .then((value) =>
-   {
-     setState(() {
-       dynamic result = json.decode(value);
-     })
-   })
-       .onError((error, stackTrace) =>
-   {
-   });
- } on PlatformException {}
-}
-```
-
-**CountryId:** integer
-
-**value:** Id of selected country.
-
-**CardId:** integer
-
-**value:** Id of selected card.
-
-**CardName:** String
-
-**value:** Name of selected card.
-
-**CardType:** integer
-
-**value:** Type of selected card.
-
-**Success:** JSON Response {
-}
-
-**Error:** String
-
-
-## 7.Method for scan barcode.
-   ```
-Future<void> startBarcode() async{
- var config= barcodeSelected;
- await AccuraOcr.startBarcode([config]).then((value) => {
-   setState((){
-     dynamic result = json.decode(value);
-   })
- });
-}
-```
-
-**BarcodeType:** String
-
-**value:** Type of barcode documents.
-
-**Success:** JSON Response {
-}
-
-**Error:** String
-
-
-## 8.Method for scan bankcard.
-
-   ```
-Future<void> startBankCard() async{
-   
- try{
-   await AccuraOcr.startBankCard().then((value) => {
-     setState((){
-       dynamic result = json.decode(value);
-     })
-   });
- }on PlatformException{}
-}
-   ```
-
-**Success:** JSON Response {
-}
-
-**Error:** String
-
-## 8.Method for get face match percentages between two face.
-   ```
-Future<void> startFaceMatch() async{
- SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
- try{
-   var accuraConfs = {
-     "face_uri":this.faceMatchURL
-   };
-
-      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
-      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraFacematch.setFaceMatchBlurPercentage(80);
-      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
-      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
-
-      await AccuraFacematch.startFaceMatch([accuraConfs])
-       .then((value) => {
-     setState((){
-       dynamic result = json.decode(value);
-     })
-   }).onError((error, stackTrace) => {
-   });
- }on PlatformException{}
-}
-```
-
-**accuraConfs:** JSON Object
-
-**face_uri:** URI
-
-
-**Success:** JSON Response {
-detect: URI?
-score: Float
-}
-
-**Error:** String
-
-
-## 9.Method for liveness check.
-Please refer this [pdf](https://github.com/accurascan/Flutter-AccuraScan-KYC/blob/master/Docker_Installation_Liveness.pdf) to get the liveness url. 
-   ```
-Future<void> startLiveness() async{
- SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
- try{
-   var accuraConfs = {
-     "face_uri":this.faceMatchURL
-   };
-
-      await AccuraLiveness.setLivenessFeedbackTextSize(18);
-      await AccuraLiveness.setLivenessFeedBackframeMessage("Frame Your Face");
-      await AccuraLiveness.setLivenessFeedBackAwayMessage("Move Phone Away");
-      await AccuraLiveness.setLivenessFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraLiveness.setLivenessFeedBackCloserMessage("Move Phone Closer");
-      await AccuraLiveness.setLivenessFeedBackCenterMessage("Move Phone Closer");
-      await AccuraLiveness.setLivenessFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraLiveness.setLivenessFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraLiveness.setLivenessFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraLiveness.setLivenessFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraLiveness.setLivenessBlurPercentage(80);
-      await AccuraLiveness.setLivenessGlarePercentage_0(-1);
-      await AccuraLiveness.setLivenessGlarePercentage_1(-1);
-      await AccuraLiveness.setLivenessFeedBackLowLightMessage("Low light detected");
-      await AccuraLiveness.setLivenessfeedbackLowLightTolerence(39);
-      await AccuraLiveness.setLivenessURL("You Liveness Url");
-
-
-
-      await AccuraLiveness.startLiveness([accuraConfs])
-       .then((value) => {
-     setState((){
-       dynamic result = json.decode(value);
-     })
-   }).onError((error, stackTrace) => {
-   });
- }on PlatformException{}
-}
-```
-
-**accuraConfs:** JSON Object
-
-**face_uri:** 'uri of face'
-
-
-**Success:** JSON Response {
-
-detect: URI?,
-
-Face_score: Float,
-
-score: Float,
-
-}
-
-**Error:** String
-
-
-## 10.Method for Only Facematch.(The following are Optional methods, Use if you need only FaceMatch)
-### To Open Gallery 1 and 2:-
-
-_For gallery 1_
-
-   ```
-  Future<void> openGallery() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-
-      await AccuraOcr.getGallery1([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      }).onError((error, stackTrace)=>{});
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-_For gallery 2_
-```
-  Future<void> openGallery2() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-      await AccuraOcr.getGallery2([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI2 = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      }).onError((error, stackTrace)=>{});
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-### To Open Camera for Facematch 1 and 2:
-
-_For Facematch 1:_
-```
-  Future<void> openCamera() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
-      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraFacematch.setFaceMatchBlurPercentage(80);
-      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
-      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
-
-      await AccuraFacematch.getCamera1([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      });
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-_For Facematch 2_
-
-```
-  Future<void> openCamera2() async{
-    try{
-      var accuraConfs = {
-        "face1": this.facematchURI,
-        "face2": this.facematchURI2
-      };
-
-      await AccuraFacematch.setFaceMatchFeedbackTextSize(18);
-      await AccuraFacematch.setFaceMatchFeedBackframeMessage("Frame Your Face");
-      await AccuraFacematch.setFaceMatchFeedBackAwayMessage("Move Phone Away");
-      await AccuraFacematch.setFaceMatchFeedBackOpenEyesMessage("Keep Your Eyes Open");
-      await AccuraFacematch.setFaceMatchFeedBackCloserMessage("Move Phone Closer");
-      await AccuraFacematch.setFaceMatchFeedBackCenterMessage("Move Phone Center");
-      await AccuraFacematch.setFaceMatchFeedbackMultipleFaceMessage("Multiple Face Detected");
-      await AccuraFacematch.setFaceMatchFeedBackFaceSteadymessage("Keep Your Head Straight");
-      await AccuraFacematch.setFaceMatchFeedBackLowLightMessage("Low light detected");
-      await AccuraFacematch.setFaceMatchFeedBackBlurFaceMessage("Blur Detected Over Face");
-      await AccuraFacematch.setFaceMatchFeedBackGlareFaceMessage("Glare Detected");
-      await AccuraFacematch.setFaceMatchBlurPercentage(80);
-      await AccuraFacematch.setFaceMatchGlarePercentage_0(-1);
-      await AccuraFacematch.setFaceMatchGlarePercentage_1(-1);
-
-      await AccuraFacematch.getCamera2([accuraConfs]).then((value) => {
-        setState(() {
-          _result = json.decode(value);
-          facematchURI2 = _result["Image"];
-          if(_result.toString().contains("score")){
-            Score = _result["score"];
-          }
-          print("RESULT:- $_result");
-        })
-      });
-    } on PlatformException {}
-    if(!mounted) return;
-  }
-```
-
-**accuraConfs:** JSON Object
-
-**Face1:** 'uri of face1'
-
-**Face2:** ’uri of face2’
-
-**Success:** JSON Response {
-
-**Image:** URI?,
-
-**score:** String,
-}
-
-**Error:** String
-
-
-Contributing
-See the contributing guide to learn how to contribute to the repository and the development workflow.
-
-License:
-MIT
-

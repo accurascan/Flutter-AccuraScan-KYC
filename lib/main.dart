@@ -1,15 +1,11 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterkyc/FaceMatch.dart';
-import 'package:flutterkyc/ocrScreen.dart';
+import '/ocrScreen.dart';
+import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'dart:typed_data';
 
 
-
-import 'FaceMatch.dart';
 void main() {
   runApp(MaterialApp(
     home: HomePage(),
@@ -55,55 +51,45 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Accura KYC"),
+        title: const Text("Accura MICR"),
         backgroundColor: Colors.red[800],
+        foregroundColor: Colors.white,
       ),
-      body: Container(
+      body: SizedBox.expand(
+        // Ensures the container takes the full height and width of the screen
+        child: Container(
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/images/bg_home.png"),
-                  fit: BoxFit.cover
-              )
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg_home.png"),
+              fit: BoxFit.cover, // Ensures the background image covers the full screen
+            ),
           ),
-          child:SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(height: 30,),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
-                      },
-                      child: Container(
-                        height: 300,
-                        width: MediaQuery.of(context).size.width-50,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/OCR.jpg"),
-                            // fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      child: Container(
-                        height: 300,
-                        width: MediaQuery.of(context).size.width-50,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/Facematch.jpg"),
-                            // fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FaceMatch()));
-                      },
-                    )
-                  ],
+          child: Center(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+              },
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width - 100,
+                decoration: BoxDecoration(
+                  color: Colors.red[800],
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              )
-          )
+                child: const Center(
+                  child: Text(
+                    "Accura MICR",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
