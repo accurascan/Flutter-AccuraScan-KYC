@@ -6,7 +6,7 @@ Accura Scan MICR SDK accurately and robustly extracts MICR data from cheques wit
 Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
-Add `flutter_accurascan_kyc: 4.2.0-MICR` under dependencies in your pubspec.yaml file.
+Add `flutter_accurascan_kyc: 4.2.2-MICR` under dependencies in your pubspec.yaml file.
 **Usage**
 Import flutter library into file.
 `import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';`
@@ -31,7 +31,6 @@ allprojects {
         jcenter()
         maven {
             url 'https://jitpack.io'
-            credentials { username 'jp_ssguccab6c5ge2l4jitaj92ek2' }
         }
     }
 }

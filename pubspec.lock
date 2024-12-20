@@ -74,10 +74,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_accurascan_kyc
-      sha256: "760ff09e018f36647e0b6fb952dde345ad212c896509e90e3863548ce8f76e7c"
+      sha256: cf75133e3b34ac1b5594f708e128ef34cf4a79a20703136d61a0ea8047656779
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.0-MICR"
+    version: "4.2.2-MICR"
   flutter_lints:
     dependency: "direct dev"
     description:
