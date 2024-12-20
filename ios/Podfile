@@ -40,5 +40,12 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # Exclude arm64 architecture for iOS Simulator
+    target.build_configurations.each do |config|
+      if config.name == 'Debug' || config.name == 'Release'
+        config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      end
+    end
   end
 end
