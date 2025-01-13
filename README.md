@@ -11,7 +11,7 @@ Accura Scan Authentication is used for your customer verification and authentica
 Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
-Add `flutter_accurascan_kyc: 4.1.6` under dependencies in your pubspec.yaml file.
+Add `flutter_accurascan_kyc: 4.1.7` under dependencies in your pubspec.yaml file.
 **Usage**
 Import flutter library into file.
 `import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';`
@@ -157,9 +157,9 @@ Place both the license in your project's Runner directory, and add the licenses 
       await AccuraOcr.Disable_Card_Name(false);
       await AccuraOcr.EnableLogs(false);
       
-      await AccuraOcr.setIsDocEnable(true); //set false to disable Document Liveness
-      await AccuraOcr.setDocUrl("Your URL"); //Add you Document Liveness URL
-      await AccuraOcr.setProgressMessage("DocLiveness Calling..."); //Add Loading Text
+      await AccuraOcr.setIsDocEnable(true); //set false to disable ID Liveness
+      await AccuraOcr.setDocUrl("Your URL"); //Add you ID Liveness URL
+      await AccuraOcr.setProgressMessage("ID Liveness Calling..."); //Add Loading Text
       await AccuraOcr.setApiTimer(10); // Set the API calling timer
       await AccuraOcr.setHideProgressDialogue(false); //true to disable Progress Dialogue
 
