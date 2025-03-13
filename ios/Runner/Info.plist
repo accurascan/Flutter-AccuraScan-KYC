@@ -28,8 +28,12 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>App requires camera access</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App required microphone access</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App requires library access</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>App required microphone access</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

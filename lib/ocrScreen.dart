@@ -73,7 +73,6 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.setCameraFacing(0);
       await AccuraOcr.isCheckPhotoCopy(false);
       await AccuraOcr.Disable_Card_Name(false);
-      await AccuraOcr.EnableLogs(false);
 
       await AccuraOcr.SCAN_TITLE_OCR_FRONT("Scan Front side of ");
       await AccuraOcr.SCAN_TITLE_OCR_BACK("Scan Back side of ");

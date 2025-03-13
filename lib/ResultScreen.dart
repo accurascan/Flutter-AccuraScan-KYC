@@ -96,7 +96,8 @@ class _ResultScreenState extends State<ResultScreen> {
       await AccuraLiveness.setLivenessFeedBackLowLightMessage("Low light detected");
       await AccuraLiveness.setLivenessfeedbackLowLightTolerence(39);
       await AccuraLiveness.setLivenessURL("your liveness url");
-
+      await AccuraLiveness.setEnableFaceMovement(true);
+      await AccuraLiveness.setEnableOralVerification(true);
 
 
       await AccuraLiveness.startLiveness([accuraConfs])
@@ -209,10 +210,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(5.0),
-                          ),
+                          ), backgroundColor: Colors.red[800],
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 20, left: 20),
-                          primary: Colors.red[800]),
+                              top: 10, bottom: 10, right: 20, left: 20)),
                       child: Row(
                         children: [
                           Image.asset(
@@ -263,10 +263,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(5.0),
-                          ),
+                          ), backgroundColor: Colors.red[800],
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 20, left: 20),
-                          primary: Colors.red[800]),
+                              top: 10, bottom: 10, right: 20, left: 20)),
                       child: Row(
                         children: [
                           Image.asset(

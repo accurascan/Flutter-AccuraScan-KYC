@@ -11,7 +11,7 @@ Accura Scan Authentication is used for your customer verification and authentica
 Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
-Add `flutter_accurascan_kyc: 4.1.7` under dependencies in your pubspec.yaml file.
+Add `flutter_accurascan_kyc: 4.1.8` under dependencies in your pubspec.yaml file.
 **Usage**
 Import flutter library into file.
 `import 'package:flutter_accurascan_kyc/flutter_accurascan_kyc.dart';`
@@ -406,7 +406,8 @@ Future<void> startLiveness() async{
       await AccuraLiveness.setLivenessFeedBackLowLightMessage("Low light detected");
       await AccuraLiveness.setLivenessfeedbackLowLightTolerence(39);
       await AccuraLiveness.setLivenessURL("You Liveness Url");
-
+      await AccuraLiveness.setEnableFaceMovement(true);
+      await AccuraLiveness.setEnableOralVerification(true);
 
 
       await AccuraLiveness.startLiveness([accuraConfs])
