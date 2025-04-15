@@ -67,6 +67,8 @@ class _MyAppState extends State<MyApp> {
       await AccuraOcr.setMinGlarePercentage(6);
       await AccuraOcr.setMaxGlarePercentage(99);
       await AccuraOcr.setBlurPercentage(60);
+      await AccuraOcr.setMicrCropping(true);
+      await AccuraOcr.setMicrBuffer(20);
 
 
       await AccuraOcr.ACCURA_ERROR_CODE_MOTION("Keep Document Steady");
